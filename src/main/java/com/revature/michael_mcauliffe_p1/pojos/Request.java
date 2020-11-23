@@ -13,8 +13,7 @@ public class Request implements Form <Employee>, Approver <RequestMessage> {
 	private ArrayList<String> attachmentsDescriptorList;
 	private double cost;
 	private String description, eventType, grade, location,  formID;
-	private Employee employee;
-	private int firstApproval, secondApproval, finalApproval;
+	private int firstApproval, secondApproval, finalApproval, employeeID;
 	private LocalDateTime firstApprovalDateAndTime, secondApprovalDateAndTime, finalApprovalDateAndTime,
 				eventDate, postingDateAndTime;
 	private ArrayList<RequestMessage> firstApprovalNoteList, secondApprovalNoteList, finalApprovalNoteList;
@@ -33,7 +32,7 @@ public class Request implements Form <Employee>, Approver <RequestMessage> {
 		this.grade = "";
 		this.location = "";
 		this.formID = "";
-		this.employee = null;
+		this.employeeID = -1;
 		this.firstApproval = 0;
 		this.secondApproval = 0;
 		this.finalApproval = 0;
@@ -53,8 +52,8 @@ public class Request implements Form <Employee>, Approver <RequestMessage> {
 	}
 
 	public Request(double cost, String description, String eventType, String grade, String location,
-			Employee employee, GradeFormat gradeFormat, LocalDateTime firstApprovalDateAndTime, LocalDateTime secondApprovalDateAndTime,
-			LocalDateTime finalApprovalDateAndTime, LocalDateTime eventDate, LocalDateTime postingDateAndTime) {
+			int employeeID, GradeFormat gradeFormat, LocalDateTime eventDate, LocalDateTime postingDateAndTime) {
+		
 		super();
 		this.attachmentList = new ArrayList<File>();
 		this.attachmentsDescriptorList = new ArrayList<String>();
@@ -63,8 +62,8 @@ public class Request implements Form <Employee>, Approver <RequestMessage> {
 		this.eventType = eventType;
 		this.grade = "";
 		this.location = location;
-		this.formID = makeID(employee, eventDate);
-		this.employee = employee;
+		this.formID = makeID(employeeID, eventDate);
+		this.employeeID = employeeID;
 		this.firstApproval = 0;
 		this.secondApproval = 0;
 		this.finalApproval = 0;
@@ -83,13 +82,13 @@ public class Request implements Form <Employee>, Approver <RequestMessage> {
 		this.isPassing = 0;
 	}
 
-	private String makeID(Employee employee, LocalDateTime eventDate) {
+	private String makeID(int employeeID, LocalDateTime eventDate) {
 		
 		String formID = "";
 		
 		DateFormat simple = new SimpleDateFormat("yyMMdd");
 		
-		formID += Integer.toString(employee.getEmployeeID());
+		formID += Integer.toString(employeeID);
 		
 		for(int i = 6; i > formID.length() ; ) {
 			
@@ -143,12 +142,6 @@ public class Request implements Form <Employee>, Approver <RequestMessage> {
 	public List<String> getAttachmentsDescriptors() {
 		
 		return this.attachmentsDescriptorList;
-	}
-
-	@Override
-	public Employee getBasicInfo() {
-		
-		return this.employee;
 	}
 
 	@Override
@@ -263,12 +256,6 @@ public class Request implements Form <Employee>, Approver <RequestMessage> {
 	public boolean needsMoreDetails() {
 		
 		return this.needsDetails;
-	}
-
-	@Override
-	public void setBasicInfo(Employee employee) {
-		
-		this.employee = employee;
 	}
 
 	@Override
@@ -422,78 +409,14 @@ public class Request implements Form <Employee>, Approver <RequestMessage> {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		long temp;
-		temp = Double.doubleToLongBits(cost);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((employee == null) ? 0 : employee.hashCode());
-		result = prime * result + ((eventDate == null) ? 0 : eventDate.hashCode());
-		result = prime * result + ((eventType == null) ? 0 : eventType.hashCode());
-		result = prime * result + ((formID == null) ? 0 : formID.hashCode());
-		result = prime * result + ((gradeFormat == null) ? 0 : gradeFormat.hashCode());
-		result = prime * result + ((location == null) ? 0 : location.hashCode());
-		result = prime * result + ((otherGradeFormat == null) ? 0 : otherGradeFormat.hashCode());
-		result = prime * result + ((postingDateAndTime == null) ? 0 : postingDateAndTime.hashCode());
-		return result;
+	public int getEmployeeID() {
+		
+		return this.employeeID;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Request other = (Request) obj;
-		if (Double.doubleToLongBits(cost) != Double.doubleToLongBits(other.cost))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (employee == null) {
-			if (other.employee != null)
-				return false;
-		} else if (!employee.equals(other.employee))
-			return false;
-		if (eventDate == null) {
-			if (other.eventDate != null)
-				return false;
-		} else if (!eventDate.equals(other.eventDate))
-			return false;
-		if (eventType == null) {
-			if (other.eventType != null)
-				return false;
-		} else if (!eventType.equals(other.eventType))
-			return false;
-		if (formID == null) {
-			if (other.formID != null)
-				return false;
-		} else if (!formID.equals(other.formID))
-			return false;
-		if (gradeFormat != other.gradeFormat)
-			return false;
-		if (location == null) {
-			if (other.location != null)
-				return false;
-		} else if (!location.equals(other.location))
-			return false;
-		if (otherGradeFormat == null) {
-			if (other.otherGradeFormat != null)
-				return false;
-		} else if (!otherGradeFormat.equals(other.otherGradeFormat))
-			return false;
-		if (postingDateAndTime == null) {
-			if (other.postingDateAndTime != null)
-				return false;
-		} else if (!postingDateAndTime.equals(other.postingDateAndTime))
-			return false;
-		return true;
+	public void setEmployeeID(int employeeID) {
+		
+		this.employeeID = employeeID;
 	}
-
 }

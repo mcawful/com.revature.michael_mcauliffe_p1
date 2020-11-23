@@ -7,9 +7,12 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import com.revature.michael_mcauliffe_p1.utils.HashAndVerifyUtil;
 
+@RunWith(MockitoJUnitRunner.class)
 public class HashAndVerifyUtilTest {
 
 	private String firstPass = "password";

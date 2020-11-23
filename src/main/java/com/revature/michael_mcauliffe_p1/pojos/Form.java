@@ -14,11 +14,11 @@ public interface Form<T> {
 	
 	public List<String> getAttachmentsDescriptors();
 	
-	public T getBasicInfo();
-	
 	public double getCost();
 	
 	public String getDescription();
+	
+	public int getEmployeeID();
 	
 	public LocalDateTime getEventDate();
 	
@@ -38,13 +38,13 @@ public interface Form<T> {
 	
 	public int isPassing();
 	
-	public void setBasicInfo(T obj);
-	
 	public void setCost(double cost);
 	
 	public void setCurrentDateAndTime(LocalDateTime date);
 	
 	public void setDecription(String decription);
+	
+	public void setEmployeeID(int employeeID);
 	
 	public void setEventDate(LocalDateTime date);
 	

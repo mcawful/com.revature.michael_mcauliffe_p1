@@ -72,6 +72,11 @@ public class Employee extends Person implements Personnel {
 		this.reportsTo = reportsTo;
 	}
 
+	public Double getMaxExpense() {
+		
+		return MAX_EXPENSE;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

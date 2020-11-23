@@ -1,0 +1,17 @@
+package com.revature.michael_mcauliffe_p1.daos;
+
+import java.util.List;
+
+public interface EmployeeDao<T> {
+
+	public boolean insertEmployee(T t);
+	
+	public boolean updateEmployee(T t, int ID);
+	
+	public boolean deleteEmployee(int ID);
+	
+	public T selectEmployee(int ID);
+	
+	public List<T> selectEmployeeList();
+	
+}

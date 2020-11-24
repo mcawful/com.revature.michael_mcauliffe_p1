@@ -76,13 +76,14 @@ public class Employee extends Person implements Personnel {
 		
 		return MAX_EXPENSE;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + employeeID;
 		result = prime * result + ((jobTitle == null) ? 0 : jobTitle.hashCode());
+		result = prime * result + loginID;
 		result = prime * result + reportsTo;
 		return result;
 	}
@@ -103,9 +104,11 @@ public class Employee extends Person implements Personnel {
 				return false;
 		} else if (!jobTitle.equals(other.jobTitle))
 			return false;
+		if (loginID != other.loginID)
+			return false;
 		if (reportsTo != other.reportsTo)
 			return false;
 		return true;
 	}
-	
+
 }

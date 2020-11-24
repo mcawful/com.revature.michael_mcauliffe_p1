@@ -7,25 +7,25 @@ import com.revature.michael_mcauliffe_p1.pojos.Employee;
 public class EmployeeDaoPostgres implements EmployeeDao<Employee> {
 
 	@Override
-	public boolean insertEmployee(Employee t) {
+	public boolean insertEmployee(Employee employee) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean updateEmployee(Employee t, int ID) {
+	public boolean updateEmployee(Employee employee) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean deleteEmployee(int ID) {
+	public boolean deleteEmployee(int employeeID) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Employee selectEmployee(int ID) {
+	public Employee selectEmployee(int employeeID) {
 		// TODO Auto-generated method stub
 		return null;
 	}

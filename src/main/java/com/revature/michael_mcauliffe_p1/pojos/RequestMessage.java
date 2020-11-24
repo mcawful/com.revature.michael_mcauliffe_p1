@@ -2,17 +2,88 @@ package com.revature.michael_mcauliffe_p1.pojos;
 
 import java.time.LocalDateTime;
 
-public class RequestMessage implements Message <Employee> {
+public class RequestMessage implements Message {
 
-	int ID;
-	String message;
-	Employee sender, recipient;
+	int messageID;
+	String message, requestID;
+
+	int senderID, recipientID;
 	LocalDateTime sentDateAndTime;
 	boolean isRead;
 	
-	public void setMessageID(int ID) {
+	
+	
+	public RequestMessage() {
+		super();
+		this.requestID = "";
+		this.message = "";
+		this.senderID = -1;
+		this.recipientID = -1;
+		this.sentDateAndTime = null;
+		this.isRead = false;
+	}
+
+	public RequestMessage(String requestID, String message, int senderID, int recipientID, LocalDateTime sentDateAndTime) {
 		
-		this.ID = ID;
+		super();
+		this.requestID = requestID;
+		this.message = message;
+		this.senderID = senderID;
+		this.recipientID = recipientID;
+		this.sentDateAndTime = sentDateAndTime;
+		this.isRead = false;
+	}
+
+	@Override
+	public String getMessage() {
+		
+		return this.message;
+	}
+	
+	public int getMessageID() {
+		
+		return messageID;
+	}
+	
+	@Override
+	public int getRecipientID() {
+		
+		return this.recipientID;
+	}
+	
+	public String getRequestID() {
+		
+		return this.requestID;
+	}
+	
+	@Override
+	public int getSenderID() {
+		
+		return this.senderID;
+	}
+	
+	@Override
+	public LocalDateTime getSentDateAndTime() {
+		
+		return this.sentDateAndTime;
+	}
+	
+	@Override
+	public void getSentDateAndTime(LocalDateTime sentDateAndTime) {
+		
+		this.sentDateAndTime = sentDateAndTime;
+	}
+	
+	@Override
+	public boolean isRead() {
+		
+		return this.isRead;
+	}
+	
+	@Override
+	public void setIsRead(boolean isRead) {
+		
+		this.isRead = isRead;
 	}
 	
 	@Override
@@ -20,113 +91,27 @@ public class RequestMessage implements Message <Employee> {
 		
 		this.message = message;
 	}
-
-	@Override
-	public void setSender(Employee employee) {
+	
+	public void setMessageID(int messageID) {
 		
-		this.sender = employee;
-	}
-
-	@Override
-	public void setRecipient(Employee employee) {
-		
-		this.recipient = employee;
-	}
-
-	@Override
-	public void getSentDateAndTime(LocalDateTime date) {
-		
-		this.sentDateAndTime = date;
-	}
-
-	@Override
-	public void setIsRead(boolean isRead) {
-		
-		this.isRead = isRead;
-	}
-
-	public int getMessageID() {
-		
-		return this.ID;
+		this.messageID = messageID;
 	}
 	
 	@Override
-	public String getMessage() {
+	public void setRecipient(int recipientID) {
 		
-		return this.message;
+		this.recipientID = recipientID;
 	}
-
-	@Override
-	public Employee getSender() {
+	
+	public void setRequestID(String requestID) {
 		
-		return this.sender;
+		this.requestID = requestID;
 	}
-
+	
 	@Override
-	public Employee getRecipient() {
+	public void setSender(int senderID) {
 		
-		return this.recipient;
+		this.senderID = senderID;
 	}
-
-	@Override
-	public LocalDateTime getSentDateAndTime() {
-		
-		return this.sentDateAndTime;
-	}
-
-	@Override
-	public boolean isRead() {
-		
-		return this.isRead;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ID;
-		result = prime * result + (isRead ? 1231 : 1237);
-		result = prime * result + ((message == null) ? 0 : message.hashCode());
-		result = prime * result + ((recipient == null) ? 0 : recipient.hashCode());
-		result = prime * result + ((sender == null) ? 0 : sender.hashCode());
-		result = prime * result + ((sentDateAndTime == null) ? 0 : sentDateAndTime.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		RequestMessage other = (RequestMessage) obj;
-		if (ID != other.ID)
-			return false;
-		if (isRead != other.isRead)
-			return false;
-		if (message == null) {
-			if (other.message != null)
-				return false;
-		} else if (!message.equals(other.message))
-			return false;
-		if (recipient == null) {
-			if (other.recipient != null)
-				return false;
-		} else if (!recipient.equals(other.recipient))
-			return false;
-		if (sender == null) {
-			if (other.sender != null)
-				return false;
-		} else if (!sender.equals(other.sender))
-			return false;
-		if (sentDateAndTime == null) {
-			if (other.sentDateAndTime != null)
-				return false;
-		} else if (!sentDateAndTime.equals(other.sentDateAndTime))
-			return false;
-		return true;
-	}
-
+	
 }

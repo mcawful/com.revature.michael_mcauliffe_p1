@@ -1,58 +1,43 @@
 package com.revature.michael_mcauliffe_p1.pojos;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-public interface Approver<T> {
-
-	public void addFinalApprovalNote(T t);
+public interface Approver {
 	
-	public void addFinalApprovalNoteList(List<T> t);
-
-	public void addFirstApprovalNote(T t);
+	public Boolean getFinalApproval();
 	
-	public void addFirstApprovalNoteList(List<T> t);
-
-	public void addsecondApprovalNote(T t);
-
-	public void addSecondApprovalNoteList(List<T> t);
-	
-	public int getFinalApproval();
-
 	public LocalDateTime getFinalApprovalDateAndTime();
-
-	public List<T> getFinalApprovalNotes();
-
-	public int getFirstApproval();
-
+	
+	public int getFinalApproverID();
+	
+	public Boolean getFirstApproval();
+	
 	public LocalDateTime getFirstApprovalDateAndTime();
-
-	public List<T> getFirstApprovalNotes();
-
-	public boolean getIsCompleted();
-
-	public int getSecondApproval();
-
+	
+	public int getFirstApproverID();
+	
+	public Boolean getSecondApproval();
+	
 	public LocalDateTime getSecondApprovalDateAndTime();
+	
+	public int getSecondApproverID();
 
-	public List<T> getSecondApprovalNotes();
-
-	public boolean needsMoreDetails();
-
-	public void setFinalApproval(int approval);
+	public void setFinalApproval(Boolean approval);
 
 	public void setFinalApprovalDateAndTime(LocalDateTime date);
 
+	public void setFinalApproverID(int ID);
+
+	public void setFirstApproval(Boolean approval);
+
 	public void setFirstApprovalDateAndTime(LocalDateTime date);
 
-	public void setFirstApproval(int approval);
+	public void setFirstApproverID(int ID);
 
-	public void setIsCompleted(boolean isCompleted);
-
-	public void setNeedsMoreDetails(boolean needsDetails);
+	public void setSecondApproval(Boolean approval);
 
 	public void setSecondApprovalDateAndTime(LocalDateTime date);
 
-	public void setSecondApproval(int approval);
+	public void setSecondApproverID(int ID);
 
 }

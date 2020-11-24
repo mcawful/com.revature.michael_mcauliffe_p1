@@ -6,7 +6,7 @@ public interface EmployeeDao<T> {
 
 	public boolean insertEmployee(T t);
 	
-	public boolean updateEmployee(T t, int ID);
+	public boolean updateEmployee(T t);
 	
 	public boolean deleteEmployee(int ID);
 	

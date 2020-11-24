@@ -2,13 +2,13 @@ package com.revature.michael_mcauliffe_p1.pojos;
 
 import java.time.LocalDateTime;
 
-public interface Message<T> {
+public interface Message {
 
 	public String getMessage();
 	
-	public T getRecipient();
+	public int getRecipientID();
 	
-	public T getSender();
+	public int getSenderID();
 	
 	public LocalDateTime getSentDateAndTime();
 	
@@ -20,7 +20,7 @@ public interface Message<T> {
 	
 	public void setMessage(String message);
 	
-	public void setRecipient(T obj);
+	public void setRecipient(int recipientID);
 	
-	public void setSender(T obj);
+	public void setSender(int senderID);
 }

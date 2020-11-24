@@ -20,17 +20,15 @@ public class RequestControllerImpl implements RequestController<Request> {
 		double cost = Double.parseDouble(ctx.formParam("cost"));
 		String description = ctx.formParam("description");
 		String eventType = ctx.formParam("EventType");
-		String grade = ctx.formParam("grade");
 		String location = ctx.formParam("locations");
 		int employeeID = Integer.parseInt(ctx.formParam("employeeID"));
 		GradeFormat gradeFormat = GradeFormat.valueOf(ctx.formParam("gradeFormat"));
+		String otherGradeFormat = ctx.formParam("otherGradeFormat");
 		LocalDateTime eventDate = LocalDateTime.parse(ctx.formParam("eventDate"), formatter);
-		LocalDateTime postingDateAndTime = LocalDateTime.parse(ctx.formParam("requestDate"), formatter);
+		LocalDateTime postingDateAndTime = LocalDateTime.parse(ctx.formParam("requestDate"), formatter);		
 		
-		
-		
-		Request request = new Request(cost, description, eventType, grade, location, employeeID,
-				gradeFormat, eventDate, postingDateAndTime);
+		Request request = new Request(cost, description, eventType, location, employeeID, eventDate, postingDateAndTime, gradeFormat, otherGradeFormat);
+	
 		return false;
 	}
 

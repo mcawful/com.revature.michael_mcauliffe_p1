@@ -6,14 +6,14 @@ public final class Manager extends Employee implements Administrator {
 	
 	public Manager() {
 		
-		super("", "", "", "", "", -1, "", "", "", 0);
+		super("", "", "", "", "", -1, "", "", "");
 		this.adminLevel = -1;
 	}
 
 	public Manager(String firstName, String lastName, String address, String city, String state, int postalCode,
-			String phoneNumber, String email, String jobTitle, int reportsTo, int adminLevel) {
+			String phoneNumber, String email, String jobTitle, int adminLevel) {
 		
-		super(firstName, lastName, address, city, state, postalCode, phoneNumber, email, jobTitle, reportsTo);
+		super(firstName, lastName, address, city, state, postalCode, phoneNumber, email, jobTitle);
 		this.adminLevel = adminLevel;
 	}
 
@@ -49,6 +49,16 @@ public final class Manager extends Employee implements Administrator {
 		if (adminLevel != other.adminLevel)
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Manager [adminLevel=" + adminLevel + ", getEmployeeID()=" + getEmployeeID() + ", getJobTitle()="
+				+ getJobTitle() + ", getReportsTo()=" + getReportsTo() + ", getMaxExpense()=" + getMaxExpense()
+				+ ", getPhoneNumber()=" + getPhoneNumber() + ", getEmail()=" + getEmail() + ", getFirstName()="
+				+ getFirstName() + ", getLastName()=" + getLastName() + ", getAddress()=" + getAddress()
+				+ ", getCity()=" + getCity() + ", getState()=" + getState() + ", getPostalCode()=" + getPostalCode()
+				+ "]";
 	}
 
 }

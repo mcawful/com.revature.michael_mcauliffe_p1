@@ -4,7 +4,7 @@ public class Employee extends Person implements Personnel {
 	
 	private String jobTitle;
 
-	private int reportsTo, loginID;
+	private Integer reportsTo;
 	private int employeeID = 0;
 	
 	public static final double MAX_EXPENSE = 1000.00;
@@ -13,22 +13,23 @@ public class Employee extends Person implements Personnel {
 		
 		super("", "", "", "", "", -1, "", "");
 		this.jobTitle = "";
-		this.reportsTo = 0;
-		this.loginID = -1;
+		this.reportsTo = null;
 	}
 
 	public Employee(String firstName, String lastName, String address, String city, String state, int postalCode,
-			String phoneNumber, String email, String jobTitle, int reportsTo) {
+			String phoneNumber, String email, String jobTitle) {
+		
+		super(firstName, lastName, address, city, state, postalCode, phoneNumber, email);
+		this.jobTitle = jobTitle;
+		this.reportsTo = null;
+	}
+	
+	public Employee(String firstName, String lastName, String address, String city, String state, int postalCode,
+			String phoneNumber, String email, String jobTitle, Integer reportsTo) {
 		
 		super(firstName, lastName, address, city, state, postalCode, phoneNumber, email);
 		this.jobTitle = jobTitle;
 		this.reportsTo = reportsTo;
-		this.loginID = -1;
-	}
-
-	public int getLoginID () {
-		
-		return this.loginID;
 	}
 	
 	@Override
@@ -44,14 +45,9 @@ public class Employee extends Person implements Personnel {
 	}
 
 	@Override
-	public int getReportsTo() {
+	public Integer getReportsTo() {
 		
 		return reportsTo;
-	}
-
-	public void setLoginID(int loginID) {
-		
-		this.loginID = loginID;
 	}
 	
 	@Override
@@ -67,7 +63,7 @@ public class Employee extends Person implements Personnel {
 	}
 
 	@Override
-	public void setReportsTo(int reportsTo) {
+	public void setReportsTo(Integer reportsTo) {
 		
 		this.reportsTo = reportsTo;
 	}
@@ -83,8 +79,7 @@ public class Employee extends Person implements Personnel {
 		int result = super.hashCode();
 		result = prime * result + employeeID;
 		result = prime * result + ((jobTitle == null) ? 0 : jobTitle.hashCode());
-		result = prime * result + loginID;
-		result = prime * result + reportsTo;
+		result = prime * result + ((reportsTo == null) ? 0 : reportsTo.hashCode());
 		return result;
 	}
 
@@ -104,11 +99,21 @@ public class Employee extends Person implements Personnel {
 				return false;
 		} else if (!jobTitle.equals(other.jobTitle))
 			return false;
-		if (loginID != other.loginID)
-			return false;
-		if (reportsTo != other.reportsTo)
+		if (reportsTo == null) {
+			if (other.reportsTo != null)
+				return false;
+		} else if (!reportsTo.equals(other.reportsTo))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [jobTitle=" + jobTitle + ", reportsTo=" + reportsTo + ", employeeID=" + employeeID
+				+ ", getPhoneNumber()=" + getPhoneNumber() + ", getEmail()=" + getEmail() + ", getFirstName()="
+				+ getFirstName() + ", getLastName()=" + getLastName() + ", getAddress()=" + getAddress()
+				+ ", getCity()=" + getCity() + ", getState()=" + getState() + ", getPostalCode()=" + getPostalCode()
+				+ "]";
 	}
 
 }

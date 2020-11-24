@@ -6,12 +6,12 @@ public interface Personnel {
 	
 	public String getJobTitle();
 	
-	public int getReportsTo();
+	public Integer getReportsTo();
 	
 	public void setEmployeeID(int employeeID);
 	
 	public void setJobTitle(String jobTitle);
 	
-	public void setReportsTo(int reportsTo);
+	public void setReportsTo(Integer reportsTo);
 	
 }

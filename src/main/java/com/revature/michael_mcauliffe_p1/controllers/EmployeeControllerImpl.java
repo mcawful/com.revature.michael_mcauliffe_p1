@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.revature.michael_mcauliffe_p1.pojos.Employee;
 import com.revature.michael_mcauliffe_p1.pojos.Manager;
+import com.revature.michael_mcauliffe_p1.services.EmployeeService;
 
 import io.javalin.http.Context;
 
@@ -24,7 +25,7 @@ public class EmployeeControllerImpl implements EmployeeController<Employee> {
 		int reportsTo = Integer.parseInt(ctx.formParam("reportsTo"));
 		int adminLevel = Integer.parseInt(ctx.formParam("adminLevel"));
 		
-		Employee employee = new Employee(firstName, lastName, address, city, state, postalCode, phoneNumber, email, jobTitle, reportsTo);
+		Employee employee = new Employee(firstName, lastName, address, city, state, postalCode, phoneNumber, email, jobTitle);
 		
 		if(adminLevel < 0) {
 			// TODO: call to service class
@@ -54,7 +55,7 @@ public class EmployeeControllerImpl implements EmployeeController<Employee> {
 		int reportsTo = Integer.parseInt(ctx.formParam("reportsTo"));
 		int adminLevel = Integer.parseInt(ctx.formParam("adminLevel"));
 		
-		Employee employee = new Employee(firstName, lastName, address, city, state, postalCode, phoneNumber, email, jobTitle, reportsTo);
+		Employee employee = new Employee(firstName, lastName, address, city, state, postalCode, phoneNumber, email, jobTitle);
 		employee.setEmployeeID(employeeID);
 		
 		if(adminLevel < 0) {

@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface EmployeeDao<T> {
 
-	public boolean insertEmployee(T t);
+	public int insertEmployee(T t);
 	
 	public boolean updateEmployee(T t);
 	

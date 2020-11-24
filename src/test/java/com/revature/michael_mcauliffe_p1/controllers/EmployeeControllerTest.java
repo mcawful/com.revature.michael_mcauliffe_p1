@@ -39,7 +39,7 @@ public class EmployeeControllerTest {
 	public void setUp() throws Exception {
 		
 		this.employee = new Employee("John", "Doe", "123 Sesame St", "Orlando", "FL", 12345,
-				"8005555555", "yes@no.com", "President", 0);
+				"8005555555", "yes@no.com", "President");
 		
 		/*Mockito.when(ctx.formParam("firstName")).thenReturn(employee.getFirstName());
 		Mockito.when(ctx.formParam("lastName")).thenReturn(employee.getLastName());

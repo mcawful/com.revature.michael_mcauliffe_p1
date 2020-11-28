@@ -5,6 +5,20 @@ public class Login implements Credentials {
 	private String username, password;
 	private int employeeID;
 	
+	public Login() {
+		super();
+		this.employeeID = 0;
+		username = "";
+		password = "";
+	}
+
+	public Login(String username, String password, int employeeID) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.employeeID = employeeID;
+	}
+
 	@Override
 	public int getID() {
 		
@@ -48,7 +62,6 @@ public class Login implements Credentials {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + employeeID;
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -64,17 +77,17 @@ public class Login implements Credentials {
 		Login other = (Login) obj;
 		if (employeeID != other.employeeID)
 			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
 		if (username == null) {
 			if (other.username != null)
 				return false;
 		} else if (!username.equals(other.username))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Login [username=" + username + ", employeeID=" + employeeID + "]";
 	}
 
 }

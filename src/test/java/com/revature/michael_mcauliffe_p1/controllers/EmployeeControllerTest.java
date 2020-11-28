@@ -12,7 +12,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.revature.michael_mcauliffe_p1.pojos.Department;
 import com.revature.michael_mcauliffe_p1.pojos.Employee;
+import com.revature.michael_mcauliffe_p1.pojos.JobTitle;
 
 import io.javalin.http.Context;
 
@@ -38,8 +40,8 @@ public class EmployeeControllerTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		this.employee = new Employee("John", "Doe", "123 Sesame St", "Orlando", "FL", 12345,
-				"8005555555", "yes@no.com", "President");
+		this.employee = new Employee("John", "Doe", "123 Sesame St", "Orlando", "FL", "12345",
+				"8005555555", "yes@no.com", JobTitle.PRESIDENT, Department.ADMINISTRATION, 0);
 		
 		/*Mockito.when(ctx.formParam("firstName")).thenReturn(employee.getFirstName());
 		Mockito.when(ctx.formParam("lastName")).thenReturn(employee.getLastName());

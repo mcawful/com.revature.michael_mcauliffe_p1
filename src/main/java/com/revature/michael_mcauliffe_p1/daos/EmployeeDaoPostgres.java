@@ -7,8 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.revature.michael_mcauliffe_p1.pojos.Department;
 import com.revature.michael_mcauliffe_p1.pojos.Employee;
-import com.revature.michael_mcauliffe_p1.pojos.Manager;
+import com.revature.michael_mcauliffe_p1.pojos.JobTitle;
 import com.revature.michael_mcauliffe_p1.utils.ConnectionFactoryUtil;
 
 public class EmployeeDaoPostgres implements EmployeeDao<Employee> {
@@ -24,33 +25,25 @@ public class EmployeeDaoPostgres implements EmployeeDao<Employee> {
 	@Override
 	public int insertEmployee(Employee employee) {
 
-		String sql = "insert into employee (job_title, first_name, last_name, address, city, state,"
-				+ "postal_code, phone_number, email, reports_to, admin_level) values"
-				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) returning *;";
+		String sql = "insert into employee (job_title, department, is_ben_co, first_name, last_name, address, city, state, "
+				+ "postal_code, phone_number, email, reports_to, admin_level) values "
+				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) returning *;";
 		
 		try (PreparedStatement ps = connection.prepareStatement(sql)){
 			
-			ps.setObject(1, employee.getJobTitle());
-			ps.setObject(2, employee.getFirstName());
-			ps.setObject(3, employee.getLastName());
-			ps.setObject(4, employee.getAddress());
-			ps.setObject(5, employee.getCity());
-			ps.setObject(6, employee.getState());
-			ps.setObject(7, employee.getPostalCode());
-			ps.setObject(8, employee.getPhoneNumber());
-			ps.setObject(9, employee.getEmail());
-			ps.setObject(10, employee.getReportsTo());
-			
-			if(employee.getClass() == Manager.class) {
-				
-				Manager manager = (Manager) employee;
-				
-				ps.setObject(11, manager.getAdminLevel());
-			}
-			else {
-				
-				ps.setObject(11, -1);
-			}
+			ps.setObject(1, employee.getJobTitle().name());
+			ps.setObject(2, employee.getDepartment().name());
+			ps.setObject(3, employee.isBenCo());
+			ps.setObject(4, employee.getFirstName());
+			ps.setObject(5, employee.getLastName());
+			ps.setObject(6, employee.getAddress());
+			ps.setObject(7, employee.getCity());
+			ps.setObject(8, employee.getState());
+			ps.setObject(9, employee.getPostalCode());
+			ps.setObject(10, employee.getPhoneNumber());
+			ps.setObject(11, employee.getEmail());
+			ps.setObject(12, employee.getReportsTo());
+			ps.setObject(13, employee.getAdminLevel());
 			
 			ResultSet rs = ps.executeQuery();
 			if(!rs.next()) return 0;
@@ -68,35 +61,27 @@ public class EmployeeDaoPostgres implements EmployeeDao<Employee> {
 	@Override
 	public boolean updateEmployee(Employee employee) {
 
-		String sql = "update employee set job_title = ?, first_name = ?, last_name = ?, address = ?,"
-				+ "city = ?, state = ?, postal_code = ?, phone_number = ?, email = ?, reports_to = ?,"
-				+ "admin_level = ? where employee_id = ? returning *;";
+		String sql = "update employee set job_title = ?, department = ?, is_ben_co = ?,"
+				+ "first_name = ?, last_name = ?, address = ?, city = ?, state = ?, postal_code = ?, "
+				+ "phone_number = ?, email = ?, reports_to = ?, admin_level = ? "
+				+ "where employee_id = ? returning *;";
 		
 		try (PreparedStatement ps = connection.prepareStatement(sql)){
 			
-			ps.setObject(1, employee.getJobTitle());
-			ps.setObject(2, employee.getFirstName());
-			ps.setObject(3, employee.getLastName());
-			ps.setObject(4, employee.getAddress());
-			ps.setObject(5, employee.getCity());
-			ps.setObject(6, employee.getState());
-			ps.setObject(7, employee.getPostalCode());
-			ps.setObject(8, employee.getPhoneNumber());
-			ps.setObject(9, employee.getEmail());
-			ps.setObject(10, employee.getReportsTo());
-			
-			if(employee.getClass() == Manager.class) {
-				
-				Manager manager = (Manager) employee;
-				
-				ps.setObject(11, manager.getAdminLevel());
-			}
-			else {
-				
-				ps.setObject(11, -1);
-			}
-			
-			ps.setObject(12, employee.getEmployeeID());
+			ps.setObject(1, employee.getJobTitle().name());
+			ps.setObject(2, employee.getDepartment().name());
+			ps.setObject(3, employee.isBenCo());
+			ps.setObject(4, employee.getFirstName());
+			ps.setObject(5, employee.getLastName());
+			ps.setObject(6, employee.getAddress());
+			ps.setObject(7, employee.getCity());
+			ps.setObject(8, employee.getState());
+			ps.setObject(9, employee.getPostalCode());
+			ps.setObject(10, employee.getPhoneNumber());
+			ps.setObject(11, employee.getEmail());
+			ps.setObject(12, employee.getReportsTo());
+			ps.setObject(13, employee.getAdminLevel());			
+			ps.setObject(14, employee.getEmployeeID());
 			
 			ResultSet rs = ps.executeQuery();
 			if(!rs.next()) return false;
@@ -152,25 +137,19 @@ public class EmployeeDaoPostgres implements EmployeeDao<Employee> {
 			Employee employee = new Employee();
 			
 			employee.setEmployeeID((Integer) rs.getObject("employee_id"));
-			employee.setJobTitle((String) rs.getObject("job_title"));
+			employee.setJobTitle(JobTitle.valueOf(rs.getObject("job_title").toString()));
+			employee.setDepartment(Department.valueOf(rs.getObject("department").toString()));
+			employee.setBenCo((Boolean) rs.getObject("is_ben_co"));
 			employee.setFirstName((String) rs.getObject("first_name"));
 			employee.setLastName((String) rs.getObject("last_name"));
 			employee.setAddress((String) rs.getObject("address"));
 			employee.setCity((String) rs.getObject("city"));
 			employee.setState((String) rs.getObject("state"));
-			employee.setPostalCode((Integer) rs.getObject("postal_code"));
+			employee.setPostalCode((String) rs.getObject("postal_code"));
 			employee.setPhoneNumber((String) rs.getObject("phone_number"));
 			employee.setEmail((String) rs.getObject("email"));
 			employee.setReportsTo((Integer) rs.getObject("reports_to"));
-			
-			if(employee.getClass() == Manager.class) {
-				
-				Manager manager = (Manager) employee;
-				manager.setAdminLevel((Integer) rs.getObject("admin_level"));
-				
-				// TODO Add logging
-				return manager;
-			}
+			employee.setAdminLevel((Integer) rs.getObject("admin_level"));
 			
 			// TODO Add logging
 			return employee;
@@ -197,26 +176,20 @@ public class EmployeeDaoPostgres implements EmployeeDao<Employee> {
 				Employee employee = new Employee();
 				
 				employee.setEmployeeID((Integer) rs.getObject("employee_id"));
-				employee.setJobTitle((String) rs.getObject("job_title"));
+				employee.setJobTitle(JobTitle.valueOf(rs.getObject("job_title").toString()));
+				employee.setDepartment(Department.valueOf(rs.getObject("department").toString()));
+				employee.setBenCo((Boolean) rs.getObject("is_ben_co"));
 				employee.setFirstName((String) rs.getObject("first_name"));
 				employee.setLastName((String) rs.getObject("last_name"));
 				employee.setAddress((String) rs.getObject("address"));
 				employee.setCity((String) rs.getObject("city"));
 				employee.setState((String) rs.getObject("state"));
-				employee.setPostalCode((Integer) rs.getObject("postal_code"));
+				employee.setPostalCode((String) rs.getObject("postal_code"));
 				employee.setPhoneNumber((String) rs.getObject("phone_number"));
 				employee.setEmail((String) rs.getObject("email"));
 				employee.setReportsTo((Integer) rs.getObject("reports_to"));
-				
-				if(employee.getClass() == Manager.class) {
-					
-					Manager manager = (Manager) employee;
-					manager.setAdminLevel((Integer) rs.getObject("admin_level"));
-					
-					// TODO Add logging
-					employeeList.add(manager);
-				}
-				
+				employee.setAdminLevel((Integer) rs.getObject("admin_level"));
+
 				// TODO Add logging
 				employeeList.add(employee);
 			}

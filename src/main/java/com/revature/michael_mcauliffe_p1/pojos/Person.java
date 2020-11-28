@@ -2,9 +2,7 @@ package com.revature.michael_mcauliffe_p1.pojos;
 
 public class Person extends AbstractPerson implements Contact {
 
-	private String firstName, lastName, address, city, state, phoneNumber, email;
-	
-	private int postalCode;
+	private String firstName, lastName, address, city, state, postalCode, phoneNumber, email;
 	
 	public Person() {
 		
@@ -17,10 +15,10 @@ public class Person extends AbstractPerson implements Contact {
 		this.state = "";
 		this.phoneNumber = "";
 		this.email = "";
-		this.postalCode = -1;
+		this.postalCode = "";
 	}
 
-	public Person(String firstName, String lastName, String address, String city, String state, int postalCode,
+	public Person(String firstName, String lastName, String address, String city, String state, String postalCode,
 			String phoneNumber, String email) {
 		
 		super();
@@ -90,7 +88,7 @@ public class Person extends AbstractPerson implements Contact {
 	}
 
 	@Override
-	public int getPostalCode() {
+	public String getPostalCode() {
 		
 		return this.postalCode;
 	}
@@ -126,7 +124,7 @@ public class Person extends AbstractPerson implements Contact {
 	}
 
 	@Override
-	public void setPostalCode(int postalCode) {
+	public void setPostalCode(String postalCode) {
 		
 		this.postalCode = postalCode;
 	}
@@ -141,7 +139,7 @@ public class Person extends AbstractPerson implements Contact {
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
-		result = prime * result + postalCode;
+		result = prime * result + ((postalCode == null) ? 0 : postalCode.hashCode());
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		return result;
 	}
@@ -185,7 +183,10 @@ public class Person extends AbstractPerson implements Contact {
 				return false;
 		} else if (!phoneNumber.equals(other.phoneNumber))
 			return false;
-		if (postalCode != other.postalCode)
+		if (postalCode == null) {
+			if (other.postalCode != null)
+				return false;
+		} else if (!postalCode.equals(other.postalCode))
 			return false;
 		if (state == null) {
 			if (other.state != null)
@@ -194,5 +195,12 @@ public class Person extends AbstractPerson implements Contact {
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Person [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city=" + city
+				+ ", state=" + state + ", postalCode=" + postalCode + ", phoneNumber=" + phoneNumber + ", email="
+				+ email + "]";
+	}
+
 }

@@ -12,8 +12,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.revature.michael_mcauliffe_p1.daos.EmployeeDaoPostgres;
+import com.revature.michael_mcauliffe_p1.pojos.Department;
 import com.revature.michael_mcauliffe_p1.pojos.Employee;
-import com.revature.michael_mcauliffe_p1.pojos.Manager;
+import com.revature.michael_mcauliffe_p1.pojos.JobTitle;
 
 public class EmployeeDaoPostgresTest {
 
@@ -21,12 +22,17 @@ public class EmployeeDaoPostgresTest {
 	
 	private static Employee employee;
 	
-	private static Manager manager;
+	private static Employee manager;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		
 		employeeDao = new EmployeeDaoPostgres();
+		manager = new Employee("Don", "Juan", "5643 Alf Rd", "Savannah", "GA", "54796", "5687576447",
+				"don.juan@anotheremail.com", JobTitle.PRESIDENT, Department.ADMINISTRATION, 0);
+		
+		employee = new Employee("Jane", "Doe", "123 Test St", "Austin", "TX", "10654", "1234567890",
+				"jane.doe@email.com", JobTitle.EMPLOYEE, Department.SALES, -1);
 	}
 
 	@AfterClass
@@ -35,12 +41,6 @@ public class EmployeeDaoPostgresTest {
 
 	@Before
 	public void setUp() throws Exception {
-		
-		manager = new Manager("Don", "Juan", "5643 Alf Rd", "Savannah", "GA", 54796, "5687576447",
-				"don.juan@anotheremail.com", "President", 0);
-		
-		employee = new Employee("Jane", "Doe", "123 Test St", "Austin", "TX", 10654, "1234567890",
-				"jane.doe@email.com", "Foreman");
 	}
 
 	@After
@@ -50,24 +50,30 @@ public class EmployeeDaoPostgresTest {
 	@Test
 	public void insertEmployeeTest() {
 		
-		assertTrue("Insert should return non-zero number.", employeeDao.insertEmployee(employee) > 0);
+		int employeeID = employeeDao.insertEmployee(employee);
+		employee.setEmployeeID(employeeID);
+		assertTrue("Insert should return non-zero number.", employeeID > 0);
+		employeeDao.deleteEmployee(employee.getEmployeeID());
 	}
 	
 	@Test
 	public void insertManagerTest() {
-		
-		assertTrue("Insert should return non-zero number.", employeeDao.insertEmployee(manager) > 0);
+		int employeeID = employeeDao.insertEmployee(manager);
+		manager.setEmployeeID(employeeID);
+		assertTrue("Insert should return non-zero number.", employeeID > 0);
+		employeeDao.deleteEmployee(manager.getEmployeeID());
 	}
 	
 	@Test
 	public void selectExistingEmployeeTest() {
 		
-		int employeeID = 1;
+		int employeeID = employeeDao.insertEmployee(employee);
 		
 		employee.setEmployeeID(employeeID);
 		Employee selectedEmployee = employeeDao.selectEmployee(employeeID);
 		
 		assertTrue("Objects should be equal.", employee.equals(selectedEmployee));
+		employeeDao.deleteEmployee(employee.getEmployeeID());
 	}
 	
 	@Test
@@ -89,11 +95,14 @@ public class EmployeeDaoPostgresTest {
 		
 		employeeDao.updateEmployee(employee);
 		
+		
+		
 		assertEquals("Employee objects should match.", employee, employeeDao.selectEmployee(employee.getEmployeeID()));
+		employeeDao.deleteEmployee(employee.getEmployeeID());
 	}
 	
 	@Test
-	public void updateNonExistingEmpoyeeTest() {
+	public void updateNonExistingEmployeeTest() {
 		
 		assertFalse("No update should occur.", employeeDao.updateEmployee(employee));
 	}
@@ -119,9 +128,10 @@ public class EmployeeDaoPostgresTest {
 		
 		List<Employee> empList = new ArrayList<>();
 		
-		employeeDao.insertEmployee(employee);
+		employee.setEmployeeID(employeeDao.insertEmployee(employee));
 		empList = employeeDao.selectEmployeeList();
 		
 		assertFalse("List should not be empty.", empList.isEmpty());
+		employeeDao.deleteEmployee(employee.getEmployeeID());
 	}
 }

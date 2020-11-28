@@ -2,8 +2,9 @@ package com.revature.michael_mcauliffe_p1.controllers;
 
 import java.util.List;
 
+import com.revature.michael_mcauliffe_p1.pojos.Department;
 import com.revature.michael_mcauliffe_p1.pojos.Employee;
-import com.revature.michael_mcauliffe_p1.pojos.Manager;
+import com.revature.michael_mcauliffe_p1.pojos.JobTitle;
 import com.revature.michael_mcauliffe_p1.services.EmployeeService;
 
 import io.javalin.http.Context;
@@ -18,21 +19,22 @@ public class EmployeeControllerImpl implements EmployeeController<Employee> {
 		String address = ctx.formParam("address");
 		String city = ctx.formParam("city");
 		String state = ctx.formParam("state");
-		int postalCode = Integer.parseInt(ctx.formParam("postalCode"));
+		String postalCode = ctx.formParam("postalCode");
 		String phoneNumber = ctx.formParam("phoneNumer");
 		String email = ctx.formParam("email");
-		String jobTitle = ctx.formParam("jobTitle");
+		JobTitle jobTitle = JobTitle.valueOf(ctx.formParam("jobTitle"));
+		Department department = Department.valueOf(ctx.formParam("department"));
 		int reportsTo = Integer.parseInt(ctx.formParam("reportsTo"));
 		int adminLevel = Integer.parseInt(ctx.formParam("adminLevel"));
 		
-		Employee employee = new Employee(firstName, lastName, address, city, state, postalCode, phoneNumber, email, jobTitle);
+		Employee employee = new Employee(firstName, lastName, address, city, state, postalCode, phoneNumber, email, jobTitle, department, reportsTo);
 		
 		if(adminLevel < 0) {
+			
 			// TODO: call to service class
 		}
 		else {
-			Manager manager = (Manager) employee;
-			manager.setAdminLevel(adminLevel);
+
 			// TODO: call to service class
 		}
 		
@@ -48,22 +50,22 @@ public class EmployeeControllerImpl implements EmployeeController<Employee> {
 		String address = ctx.formParam("address");
 		String city = ctx.formParam("city");
 		String state = ctx.formParam("state");
-		int postalCode = Integer.parseInt(ctx.formParam("postalCode"));
+		String postalCode = ctx.formParam("postalCode");
 		String phoneNumber = ctx.formParam("phoneNumer");
 		String email = ctx.formParam("email");
-		String jobTitle = ctx.formParam("jobTitle");
+		JobTitle jobTitle = JobTitle.valueOf(ctx.formParam("jobTitle"));
+		Department department = Department.valueOf(ctx.formParam("department"));
 		int reportsTo = Integer.parseInt(ctx.formParam("reportsTo"));
 		int adminLevel = Integer.parseInt(ctx.formParam("adminLevel"));
 		
-		Employee employee = new Employee(firstName, lastName, address, city, state, postalCode, phoneNumber, email, jobTitle);
+		Employee employee = new Employee(firstName, lastName, address, city, state, postalCode, phoneNumber, email, jobTitle, department, reportsTo);
 		employee.setEmployeeID(employeeID);
 		
 		if(adminLevel < 0) {
 			// TODO call to service class
 		}
 		else {
-			Manager manager = (Manager) employee;
-			manager.setAdminLevel(adminLevel);
+
 			// TODO call to service class
 		}
 		

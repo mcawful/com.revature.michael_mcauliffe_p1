@@ -10,13 +10,13 @@ public interface Form {
 	
 	public int getEmployeeID();
 	
-	public LocalDateTime getEventDate();
+	public LocalDateTime getEventDateStart();
 	
-	public String getEventType();
+	public EventType getEventType();
 	
 	public String getFormID();
 	
-	public String getGrade();
+	public byte[] getGrade();
 	
 	public GradeFormat getGradeFormat();
 	
@@ -24,9 +24,17 @@ public interface Form {
 	
 	public String getOtherGradeFormat();
 	
+	public String getPassingGradeOther();
+	
 	public LocalDateTime getPostingDateAndTime();
 	
+	public double getReimbursement();
+	
+	public boolean isComplete();
+	
 	public Boolean isPassing();
+	
+	public boolean isUrgent();
 	
 	public void setCost(double cost);
 	
@@ -34,22 +42,33 @@ public interface Form {
 	
 	public void setEmployeeID(int employeeID);
 	
-	public void setEventDate(LocalDateTime date);
+	public void setEventDateStart(LocalDateTime date);
 	
-	public void setEventType(String eventType);
+	public void setEventType(EventType eventType);
 	
 	public void setFormID(String formID);
 	
-	public void setGrade(String grade);
+	public void setGrade(byte[] grade);
 	
 	public void setGradeFormat(GradeFormat gradeFormat);
 	
+	public void setIsComplete(boolean isComplete);
+	
 	public void setIsPassing(Boolean isPassing);
+	
+	public void setIsUrgent(boolean isUrgent);
 	
 	public void setLocation(String location);
 	
 	public void setOtherGradeFormat(String otherGradeFormat);
 	
+	public void setPassingGradeOther(String passingGradeOther);
+	
 	public void setPostingDateAndTime(LocalDateTime date);
 	
+	public void setReimbursement(double reimbursement);
+	
+	public LocalDateTime getEventDateEnd();
+	
+	public void setLocalDateEnd(LocalDateTime date);
 }

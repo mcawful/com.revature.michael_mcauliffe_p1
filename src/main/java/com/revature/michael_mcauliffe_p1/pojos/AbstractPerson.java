@@ -12,7 +12,7 @@ public abstract class AbstractPerson {
 	
 	public abstract String getState();
 	
-	public abstract int getPostalCode();
+	public abstract String getPostalCode();
 	
 	public abstract void setFirstName(String firstName);
 	
@@ -24,6 +24,6 @@ public abstract class AbstractPerson {
 	
 	public abstract void setState(String state);
 	
-	public abstract void setPostalCode(int postalCode);
+	public abstract void setPostalCode(String postalCode);
 	
 }

@@ -2,7 +2,7 @@ package com.revature.michael_mcauliffe_p1.pojos;
 
 import java.time.LocalDateTime;
 
-public interface Approver {
+public interface Approval {
 	
 	public Boolean getFinalApproval();
 	

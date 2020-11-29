@@ -1,6 +1,7 @@
 package com.revature.michael_mcauliffe_p1.pojos;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 public class RequestMessage implements Message {
 
@@ -65,7 +66,7 @@ public class RequestMessage implements Message {
 	@Override
 	public LocalDateTime getSentDateAndTime() {
 		
-		return this.sentDateAndTime;
+		return this.sentDateAndTime.truncatedTo(ChronoUnit.MILLIS);
 	}
 	
 	@Override

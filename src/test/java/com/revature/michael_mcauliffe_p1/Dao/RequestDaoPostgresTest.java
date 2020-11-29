@@ -47,7 +47,7 @@ public class RequestDaoPostgresTest {
 		FileInputStream fis = null;
 		try {
 			
-			fis = new FileInputStream("C:\\Java Programs\\com.revature.michael_mcauliffe_p1\\src\\test\\resources\\Test File.exe");
+			fis = new FileInputStream("C:\\Java Programs\\com.revature.michael_mcauliffe_p1\\src\\test\\resources\\Test File.txt");
 			grade = fis.readAllBytes();
 			fis.close();
 		}

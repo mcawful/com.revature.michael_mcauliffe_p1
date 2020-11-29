@@ -1,15 +1,16 @@
 package com.revature.michael_mcauliffe_p1.pojos;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
-public class RequestApprover implements Approver {
+public class RequestApproval implements Approval {
 
 	private int approvalID, firstApproverID, secondApproverID, finalApproverID;
 	private String requestID;
 	private LocalDateTime firstApprovalDateAndTime, secondApprovalDateAndTime, finalApprovalDateAndTime;
 	private Boolean firstApproval, secondApproval, finalApproval;
 	
-	public RequestApprover() {
+	public RequestApproval() {
 		super();
 		this.firstApproverID = -1;
 		this.secondApproverID = -1;
@@ -24,7 +25,7 @@ public class RequestApprover implements Approver {
 		this.finalApproval = null;
 	}
 
-	public RequestApprover(int firstApproverID, int secondApproverID, int finalApproverID, String requestID) {
+	public RequestApproval(int firstApproverID, int secondApproverID, int finalApproverID, String requestID) {
 		
 		super();
 		this.firstApproverID = firstApproverID;
@@ -111,7 +112,7 @@ public class RequestApprover implements Approver {
 	@Override
 	public void setFinalApprovalDateAndTime(LocalDateTime finalApprovalDateAndTime) {
 		
-		this.finalApprovalDateAndTime = finalApprovalDateAndTime;
+		this.finalApprovalDateAndTime = finalApprovalDateAndTime.truncatedTo(ChronoUnit.MILLIS);
 	}
 	
 	@Override
@@ -129,7 +130,7 @@ public class RequestApprover implements Approver {
 	@Override
 	public void setFirstApprovalDateAndTime(LocalDateTime firstApprovalDateAndTime) {
 		
-		this.firstApprovalDateAndTime = firstApprovalDateAndTime;
+		this.firstApprovalDateAndTime = firstApprovalDateAndTime.truncatedTo(ChronoUnit.MILLIS);
 	}
 
 	@Override
@@ -152,7 +153,7 @@ public class RequestApprover implements Approver {
 	@Override
 	public void setSecondApprovalDateAndTime(LocalDateTime secondApprovalDateAndTime) {
 		
-		this.secondApprovalDateAndTime = secondApprovalDateAndTime;
+		this.secondApprovalDateAndTime = secondApprovalDateAndTime.truncatedTo(ChronoUnit.MILLIS);
 	}
 
 	@Override
@@ -187,7 +188,7 @@ public class RequestApprover implements Approver {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RequestApprover other = (RequestApprover) obj;
+		RequestApproval other = (RequestApproval) obj;
 		if (approvalID != other.approvalID)
 			return false;
 		if (finalApproval == null) {
@@ -233,5 +234,15 @@ public class RequestApprover implements Approver {
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "RequestApproval [approvalID=" + approvalID + ", firstApproverID=" + firstApproverID
+				+ ", secondApproverID=" + secondApproverID + ", finalApproverID=" + finalApproverID + ", requestID="
+				+ requestID + ", firstApprovalDateAndTime=" + firstApprovalDateAndTime + ", secondApprovalDateAndTime="
+				+ secondApprovalDateAndTime + ", finalApprovalDateAndTime=" + finalApprovalDateAndTime
+				+ ", firstApproval=" + firstApproval + ", secondApproval=" + secondApproval + ", finalApproval="
+				+ finalApproval + "]";
+	}
+
 }

@@ -1,38 +1,36 @@
 package com.revature.michael_mcauliffe_p1.pojos;
 
-import java.io.File;
-
 public class RequestAttachment implements Attachment {
 
 	private int attachmentID;
 	private String requestID, description;
-	private File attachment;
+	private byte[] file;
 	
 	public RequestAttachment() {
 		
 		super();
 		this.requestID = "";
-		this.attachment = null;
+		this.file = null;
 		this.description = "";
 		
 	}
 
-	public RequestAttachment(String requestID, File attachment, String description) {
+	public RequestAttachment(String requestID, byte[] file, String description) {
 		
 		super();
 		this.requestID = requestID;
-		this.attachment = attachment;
+		this.file = file;
 		this.description = description;
 	}
 
 	@Override
-	public File getAttachment() {
+	public byte[] getFile() {
 		
-		return this.attachment;
+		return this.file;
 	}
 
 	@Override
-	public String getAttachmentDescriptor() {
+	public String getDescription() {
 		
 		return this.description;
 	}
@@ -48,13 +46,13 @@ public class RequestAttachment implements Attachment {
 	}
 
 	@Override
-	public void setAttachment(File attachment) {
+	public void setFile(byte[] file) {
 		
-		this.attachment = attachment;
+		this.file = file;
 	}
 
 	@Override
-	public void setAttachmentDescriptor(String description) {
+	public void setDescription(String description) {
 		
 		this.description = description;
 	}
@@ -73,7 +71,6 @@ public class RequestAttachment implements Attachment {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((attachment == null) ? 0 : attachment.hashCode());
 		result = prime * result + attachmentID;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((requestID == null) ? 0 : requestID.hashCode());
@@ -89,11 +86,6 @@ public class RequestAttachment implements Attachment {
 		if (getClass() != obj.getClass())
 			return false;
 		RequestAttachment other = (RequestAttachment) obj;
-		if (attachment == null) {
-			if (other.attachment != null)
-				return false;
-		} else if (!attachment.equals(other.attachment))
-			return false;
 		if (attachmentID != other.attachmentID)
 			return false;
 		if (description == null) {
@@ -107,6 +99,12 @@ public class RequestAttachment implements Attachment {
 		} else if (!requestID.equals(other.requestID))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "RequestAttachment [attachmentID=" + attachmentID + ", requestID=" + requestID + ", description="
+				+ description + "]";
 	}
 
 }

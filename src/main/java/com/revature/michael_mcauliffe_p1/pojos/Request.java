@@ -6,7 +6,6 @@ import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Arrays;
 
 public class Request implements Form {
 
@@ -340,7 +339,6 @@ public class Request implements Form {
 		result = prime * result + ((eventDateStart == null) ? 0 : eventDateStart.hashCode());
 		result = prime * result + ((eventType == null) ? 0 : eventType.hashCode());
 		result = prime * result + ((formID == null) ? 0 : formID.hashCode());
-		result = prime * result + Arrays.hashCode(grade);
 		result = prime * result + ((gradeFormat == null) ? 0 : gradeFormat.hashCode());
 		result = prime * result + (isComplete ? 1231 : 1237);
 		result = prime * result + ((isPassing == null) ? 0 : isPassing.hashCode());
@@ -389,8 +387,6 @@ public class Request implements Form {
 				return false;
 		} else if (!formID.equals(other.formID))
 			return false;
-		if (!Arrays.equals(grade, other.grade))
-			return false;
 		if (gradeFormat != other.gradeFormat)
 			return false;
 		if (isComplete != other.isComplete)
@@ -429,12 +425,9 @@ public class Request implements Form {
 
 	@Override
 	public String toString() {
-		return "Request [cost=" + cost + ", reimbursement=" + reimbursement + ", description=" + description
-				+ ", location=" + location + ", formID=" + formID + ", eventType=" + eventType + ", employeeID="
-				+ employeeID + ", eventDateStart=" + eventDateStart + ", eventDateEnd=" + eventDateEnd
-				+ ", postingDateAndTime=" + postingDateAndTime + ", gradeFormat=" + gradeFormat + ", otherGradeFormat="
-				+ otherGradeFormat + ", passingGradeOther=" + passingGradeOther + ", grade=" + Arrays.toString(grade)
-				+ ", isUrgent=" + isUrgent + ", isComplete=" + isComplete + ", isPassing=" + isPassing + "]";
+		return "Request [cost=" + cost + ", reimbursement=" + reimbursement + ", formID=" + formID + ", eventType="
+				+ eventType + ", employeeID=" + employeeID + ", eventDateStart=" + eventDateStart + ", eventDateEnd="
+				+ eventDateEnd + ", isUrgent=" + isUrgent + ", isComplete=" + isComplete + "]";
 	}
-	
+
 }

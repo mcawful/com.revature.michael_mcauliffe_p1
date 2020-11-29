@@ -8,14 +8,18 @@ public interface ApprovalDao<T> {
 	
 	public boolean updateApproval(T t);
 	
-	public boolean deleteApproval(T t);
+	public boolean deleteApproval(int ID);
 	
-	public T selectApproval(String ID);
+	public T selectApproval(int ID);
 	
 	public List<T> selectAllApprovals();
 	
-	public List<T> selectApprovalsByApprover(int ID);
+	public List<T> selectApprovalsByFirstApprover(int ID);
 	
-	public List<T> selectApprovalsbyReport(String ID);
+	public List<T> selectApprovalsBySecondApprover(int ID);
+	
+	public List<T> selectApprovalsByFinalApprover(int ID);
+	
+	public List<T> selectApprovalsByRequest(String ID);
 	
 }

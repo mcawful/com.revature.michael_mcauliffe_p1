@@ -4,16 +4,16 @@ import java.util.List;
 
 public interface AttachmentDao<T> {
 
-	public int insertattachment(T t);
+	public int insertAttachment(T t);
 	
 	public boolean updateAttachment(T t);
 	
-	public boolean deleteAttachment(T t);
+	public boolean deleteAttachment(int ID);
 	
 	public T selectAttachment(int ID);
 	
-	public List<T> selectAllAttachment();
+	public List<T> selectAllAttachments();
 	
-	public List<T> selectAttachmentsByReport(String ID);
+	public List<T> selectAttachmentsByRequest(String ID);
 	
 }

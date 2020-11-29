@@ -1,15 +1,13 @@
 package com.revature.michael_mcauliffe_p1.pojos;
 
-import java.io.File;
-
 public interface Attachment {
 
-	public void setAttachment(File attachment);
+	public void setFile(byte[] file);
 	
-	public void setAttachmentDescriptor(String attachmentDescriptor);
+	public void setDescription(String attachmentDescriptor);
 	
-	public File getAttachment();
+	public byte[] getFile();
 	
-	public String getAttachmentDescriptor();
+	public String getDescription();
 	
 }

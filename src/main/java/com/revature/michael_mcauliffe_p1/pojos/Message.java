@@ -12,8 +12,6 @@ public interface Message {
 	
 	public LocalDateTime getSentDateAndTime();
 	
-	public void getSentDateAndTime(LocalDateTime date);
-	
 	public boolean isRead();
 	
 	public void setIsRead(boolean isRead);
@@ -23,4 +21,6 @@ public interface Message {
 	public void setRecipient(int recipientID);
 	
 	public void setSender(int senderID);
+	
+	public void setSentDateAndTime(LocalDateTime date);
 }

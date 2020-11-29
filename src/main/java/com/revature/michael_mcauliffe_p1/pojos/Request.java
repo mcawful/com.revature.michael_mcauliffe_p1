@@ -429,9 +429,12 @@ public class Request implements Form {
 
 	@Override
 	public String toString() {
-		return "Request [cost=" + cost + ", reimbursement=" + reimbursement + ", formID=" + formID + ", eventType="
-				+ eventType + ", employeeID=" + employeeID + ", eventDateStart=" + eventDateStart + ", eventDateEnd="
-				+ eventDateEnd + ", isUrgent=" + isUrgent + ", isComplete=" + isComplete + "]";
+		return "Request [cost=" + cost + ", reimbursement=" + reimbursement + ", description=" + description
+				+ ", location=" + location + ", formID=" + formID + ", eventType=" + eventType + ", employeeID="
+				+ employeeID + ", eventDateStart=" + eventDateStart + ", eventDateEnd=" + eventDateEnd
+				+ ", postingDateAndTime=" + postingDateAndTime + ", gradeFormat=" + gradeFormat + ", otherGradeFormat="
+				+ otherGradeFormat + ", passingGradeOther=" + passingGradeOther + ", grade=" + Arrays.toString(grade)
+				+ ", isUrgent=" + isUrgent + ", isComplete=" + isComplete + ", isPassing=" + isPassing + "]";
 	}
 	
 }

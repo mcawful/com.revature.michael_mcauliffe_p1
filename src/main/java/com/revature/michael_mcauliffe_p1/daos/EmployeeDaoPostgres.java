@@ -27,7 +27,7 @@ public class EmployeeDaoPostgres implements EmployeeDao<Employee> {
 
 		String sql = "insert into employee (job_title, department, is_ben_co, first_name, last_name, address, city, state, "
 				+ "postal_code, phone_number, email, reports_to, admin_level) values "
-				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) returning *;";
+				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) on conflict do nothing returning *;";
 		
 		try (PreparedStatement ps = connection.prepareStatement(sql)){
 			

@@ -103,7 +103,7 @@ public class RequestDaoPostgresTest {
 		
 		request1.setDecription("This is now different.");
 		
-		assertTrue("Update will retune true if successful.", requestDao.updateRequest(request1));
+		assertTrue("Update will return true if successful.", requestDao.updateRequest(request1));
 
 	}
 	

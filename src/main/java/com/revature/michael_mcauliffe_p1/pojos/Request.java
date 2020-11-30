@@ -1,6 +1,5 @@
 package com.revature.michael_mcauliffe_p1.pojos;
 
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
@@ -10,7 +9,7 @@ import java.time.temporal.ChronoUnit;
 public class Request implements Form {
 
 	private double cost, reimbursement;
-	private String description, location,  formID;
+	private String description, location, formID;
 	private EventType eventType;
 	private int employeeID;
 	private LocalDateTime eventDateStart, eventDateEnd, postingDateAndTime;
@@ -19,9 +18,9 @@ public class Request implements Form {
 	private byte[] grade;
 	private boolean isUrgent, isComplete;
 	private Boolean isPassing;
-	
+
 	public Request() {
-		
+
 		super();
 		this.cost = 0.00;
 		this.reimbursement = 0.00;
@@ -41,11 +40,11 @@ public class Request implements Form {
 		this.isUrgent = false;
 		this.isComplete = false;
 	}
-	
+
 	public Request(double cost, String description, EventType eventType, String location, int employeeID,
 			LocalDateTime eventDateStart, LocalDateTime eventDateEnd, LocalDateTime postingDateAndTime,
 			GradeFormat gradeFormat, String otherGradeFormat, String passingGradeOther, boolean isUrgent) {
-		
+
 		super();
 		this.cost = cost;
 		this.reimbursement = calculateReimbursement(cost, eventType);
@@ -65,265 +64,264 @@ public class Request implements Form {
 		this.isUrgent = isUrgent;
 		this.isComplete = false;
 	}
-	
-	
-	
+
 	@Override
 	public double getCost() {
-		
+
 		return this.cost;
 	}
-	
+
 	@Override
 	public String getDescription() {
-		
+
 		return this.description;
 	}
-	
+
 	@Override
 	public int getEmployeeID() {
-		
+
 		return this.employeeID;
 	}
-	
+
 	@Override
 	public LocalDateTime getEventDateEnd() {
-		
+
 		return this.eventDateEnd;
 	}
-	
+
 	@Override
 	public LocalDateTime getEventDateStart() {
-		
+
 		return this.eventDateStart;
 	}
-	
+
 	@Override
 	public EventType getEventType() {
-		
+
 		return this.eventType;
 	}
-	
+
 	@Override
 	public String getFormID() {
-		
+
 		return this.formID;
 	}
-	
+
 	@Override
 	public byte[] getGrade() {
-		
+
 		return this.grade;
 	}
-	
+
 	@Override
 	public GradeFormat getGradeFormat() {
-		
+
 		return this.gradeFormat;
 	}
-	
+
 	@Override
 	public String getLocation() {
-		
+
 		return this.location;
 	}
-	
+
 	@Override
 	public String getOtherGradeFormat() {
-		
+
 		return this.otherGradeFormat;
 	}
-	
+
 	@Override
 	public String getPassingGradeOther() {
-		
+
 		return this.passingGradeOther;
 	}
-	
+
 	@Override
 	public LocalDateTime getPostingDateAndTime() {
-		
+
 		return this.postingDateAndTime;
 	}
-	
+
 	@Override
 	public double getReimbursement() {
-		
+
 		return this.reimbursement;
 	}
-	
+
 	@Override
 	public boolean isComplete() {
-		
+
 		return this.isComplete;
 	}
-	
+
 	@Override
 	public Boolean isPassing() {
-		
+
 		return this.isPassing;
 	}
-	
+
 	@Override
 	public boolean isUrgent() {
-		
+
 		return this.isUrgent;
 	}
-	
+
 	@Override
 	public void setCost(double cost) {
-		
+
 		this.cost = cost;
 	}
-	
+
 	@Override
 	public void setDecription(String decription) {
-		
+
 		this.description = decription;
 	}
-	
+
 	@Override
 	public void setEmployeeID(int employeeID) {
-		
+
 		this.employeeID = employeeID;
 	}
-	
+
 	@Override
 	public void setEventDateStart(LocalDateTime eventDateStart) {
-		
+
 		this.eventDateStart = eventDateStart.truncatedTo(ChronoUnit.MILLIS);
 	}
 
 	@Override
 	public void setEventType(EventType eventType) {
-		
+
 		this.eventType = eventType;
 	}
 
 	@Override
 	public void setFormID(String formID) {
-		
+
 		this.formID = formID;
 	}
 
 	@Override
 	public void setGrade(byte[] grade) {
-		
+
 		this.grade = grade;
 	}
 
 	@Override
 	public void setGradeFormat(GradeFormat gradeFormat) {
-		
+
 		this.gradeFormat = gradeFormat;
 	}
 
 	@Override
 	public void setIsComplete(boolean isComplete) {
-		
+
 		this.isComplete = isComplete;
 	}
 
 	@Override
 	public void setIsPassing(Boolean isPassing) {
-		
+
 		this.isPassing = isPassing;
 	}
 
 	@Override
 	public void setIsUrgent(boolean isUrgent) {
-		
+
 		this.isUrgent = isUrgent;
 	}
 
 	@Override
 	public void setLocalDateEnd(LocalDateTime eventDateEnd) {
-		
+
 		this.eventDateEnd = eventDateEnd.truncatedTo(ChronoUnit.MILLIS);
 	}
-	
+
 	@Override
 	public void setLocation(String location) {
-		
+
 		this.location = location;
 	}
-	
+
 	@Override
 	public void setOtherGradeFormat(String otherGradeFormat) {
-		
+
 		this.otherGradeFormat = otherGradeFormat;
 	}
-	
+
 	@Override
 	public void setPassingGradeOther(String passingGradeOther) {
-		
+
 		this.passingGradeOther = passingGradeOther;
 	}
 
 	@Override
 	public void setPostingDateAndTime(LocalDateTime postingDateAndTime) {
-		
+
 		this.postingDateAndTime = postingDateAndTime.truncatedTo(ChronoUnit.MILLIS);
 	}
 
 	@Override
 	public void setReimbursement(double reimbursement) {
-		
+
 		this.reimbursement = reimbursement;
 	}
 
 	private double calculateReimbursement(double cost, EventType eventType) {
-		
-		switch(eventType) {
-		
+
+		switch (eventType) {
+
 		case CERTIFICATION:
 			return round(cost, 2);
-			
+
 		case TECHNICAL_TRAINING:
 			return round(cost * 0.9, 2);
-		
+
 		case UNIVERSITY_COURSE:
 			return round(cost * 0.8, 2);
-		
+
 		case PREPERATION_CLASS:
 			return round(cost * 0.75, 2);
-			
+
 		case SEMINAR:
 			return round(cost * 0.6, 2);
-			
+
 		default:
 			return round(cost * 0.3, 2);
 		}
 	}
-	
+
 	private String makeID(int employeeID, LocalDateTime eventDate) {
-		
+
 		String formID = "";
-		
+
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyMMdd");
-		
+
 		formID += Integer.toString(employeeID);
-		
-		for(int i = 6; i > formID.length() ; ) {
-			
+
+		for (int i = 6; i > formID.length();) {
+
 			formID = "0" + formID;
 		}
-		
+
 		formID += "-";
-		
+
 		formID += dtf.format(eventDate);
-		
-		formID += "-" + (int)(Math.random() * 99);
-		
+
+		formID += "-" + (int) (Math.random() * 99);
+
 		return formID;
 	}
-	
-	private double round(double value, int places) {
-	    if (places < 0) throw new IllegalArgumentException();
 
-	    BigDecimal bd = BigDecimal.valueOf(value);
-	    bd = bd.setScale(places, RoundingMode.HALF_UP);
-	    return bd.doubleValue();
+	private double round(double value, int places) {
+		if (places < 0)
+			throw new IllegalArgumentException();
+
+		BigDecimal bd = BigDecimal.valueOf(value);
+		bd = bd.setScale(places, RoundingMode.HALF_UP);
+		return bd.doubleValue();
 	}
 
 	@Override

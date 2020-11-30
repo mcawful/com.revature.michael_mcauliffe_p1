@@ -3,9 +3,9 @@ package com.revature.michael_mcauliffe_p1.pojos;
 public class Person extends AbstractPerson implements Contact {
 
 	private String firstName, lastName, address, city, state, postalCode, phoneNumber, email;
-	
+
 	public Person() {
-		
+
 		super();
 
 		this.firstName = "";
@@ -20,9 +20,9 @@ public class Person extends AbstractPerson implements Contact {
 
 	public Person(String firstName, String lastName, String address, String city, String state, String postalCode,
 			String phoneNumber, String email) {
-		
+
 		super();
-		
+
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
@@ -35,97 +35,97 @@ public class Person extends AbstractPerson implements Contact {
 
 	@Override
 	public String getPhoneNumber() {
-		
+
 		return this.phoneNumber;
 	}
 
 	@Override
 	public String getEmail() {
-		
+
 		return this.email;
 	}
 
 	@Override
 	public void setPhoneNumber(String phoneNumber) {
-		
+
 		this.phoneNumber = phoneNumber;
 	}
 
 	@Override
 	public void setEmail(String email) {
-		
+
 		this.email = email;
 	}
 
 	@Override
 	public String getFirstName() {
-		
+
 		return this.firstName;
 	}
 
 	@Override
 	public String getLastName() {
-		
+
 		return this.lastName;
 	}
 
 	@Override
 	public String getAddress() {
-		
+
 		return this.address;
 	}
 
 	@Override
 	public String getCity() {
-		
+
 		return this.city;
 	}
 
 	@Override
 	public String getState() {
-		
+
 		return this.state;
 	}
 
 	@Override
 	public String getPostalCode() {
-		
+
 		return this.postalCode;
 	}
 
 	@Override
 	public void setFirstName(String firstName) {
-		
+
 		this.firstName = firstName;
 	}
 
 	@Override
 	public void setLastName(String lastName) {
-		
+
 		this.lastName = lastName;
 	}
 
 	@Override
 	public void setAddress(String address) {
-		
+
 		this.address = address;
 	}
 
 	@Override
 	public void setCity(String city) {
-		
+
 		this.city = city;
 	}
 
 	@Override
 	public void setState(String state) {
-		
+
 		this.state = state;
 	}
 
 	@Override
 	public void setPostalCode(String postalCode) {
-		
+
 		this.postalCode = postalCode;
 	}
 

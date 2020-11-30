@@ -9,7 +9,7 @@ public class RequestApproval implements Approval {
 	private String requestID;
 	private LocalDateTime firstApprovalDateAndTime, secondApprovalDateAndTime, finalApprovalDateAndTime;
 	private Boolean firstApproval, secondApproval, finalApproval;
-	
+
 	public RequestApproval() {
 		super();
 		this.firstApproverID = -1;
@@ -26,7 +26,7 @@ public class RequestApproval implements Approval {
 	}
 
 	public RequestApproval(int firstApproverID, int secondApproverID, int finalApproverID, String requestID) {
-		
+
 		super();
 		this.firstApproverID = firstApproverID;
 		this.secondApproverID = secondApproverID;
@@ -35,130 +35,130 @@ public class RequestApproval implements Approval {
 	}
 
 	public int getApprovalID() {
-		
+
 		return this.approvalID;
 	}
-	
+
 	@Override
 	public Boolean getFinalApproval() {
-		
+
 		return this.finalApproval;
 	}
-	
+
 	@Override
 	public LocalDateTime getFinalApprovalDateAndTime() {
-		
+
 		return this.finalApprovalDateAndTime;
 	}
-	
+
 	@Override
 	public int getFinalApproverID() {
-		
+
 		return this.finalApproverID;
 	}
-	
+
 	@Override
 	public Boolean getFirstApproval() {
-		
+
 		return this.firstApproval;
 	}
-	
+
 	@Override
 	public LocalDateTime getFirstApprovalDateAndTime() {
-		
+
 		return this.firstApprovalDateAndTime;
 	}
-	
+
 	@Override
 	public int getFirstApproverID() {
-		
+
 		return this.firstApproverID;
 	}
-	
+
 	public String getRequestID() {
-		
+
 		return this.requestID;
 	}
-	
+
 	@Override
 	public Boolean getSecondApproval() {
-		
+
 		return this.secondApproval;
 	}
-	
+
 	@Override
 	public LocalDateTime getSecondApprovalDateAndTime() {
-		
+
 		return this.secondApprovalDateAndTime;
 	}
-	
+
 	@Override
 	public int getSecondApproverID() {
-		
+
 		return this.secondApproverID;
 	}
-	
-	public void setApprovalID(int approvalID ) {
-		
+
+	public void setApprovalID(int approvalID) {
+
 		this.approvalID = approvalID;
 	}
-	
+
 	@Override
 	public void setFinalApproval(Boolean finalApproval) {
-		
+
 		this.finalApproval = finalApproval;
 	}
-	
+
 	@Override
 	public void setFinalApprovalDateAndTime(LocalDateTime finalApprovalDateAndTime) {
-		
+
 		this.finalApprovalDateAndTime = finalApprovalDateAndTime.truncatedTo(ChronoUnit.MILLIS);
 	}
-	
+
 	@Override
 	public void setFinalApproverID(int finalApproverID) {
-		
+
 		this.finalApproverID = finalApproverID;
 	}
-	
+
 	@Override
 	public void setFirstApproval(Boolean firstApproval) {
-		
+
 		this.firstApproval = firstApproval;
 	}
 
 	@Override
 	public void setFirstApprovalDateAndTime(LocalDateTime firstApprovalDateAndTime) {
-		
+
 		this.firstApprovalDateAndTime = firstApprovalDateAndTime.truncatedTo(ChronoUnit.MILLIS);
 	}
 
 	@Override
 	public void setFirstApproverID(int firstApproverID) {
-		
+
 		this.firstApproverID = firstApproverID;
 	}
 
 	public void setRequestID(String requestID) {
-		
+
 		this.requestID = requestID;
 	}
 
 	@Override
 	public void setSecondApproval(Boolean secondApproval) {
-		
+
 		this.secondApproval = secondApproval;
 	}
 
 	@Override
 	public void setSecondApprovalDateAndTime(LocalDateTime secondApprovalDateAndTime) {
-		
+
 		this.secondApprovalDateAndTime = secondApprovalDateAndTime.truncatedTo(ChronoUnit.MILLIS);
 	}
 
 	@Override
 	public void setSecondApproverID(int secondApproverID) {
-		
+
 		this.secondApproverID = secondApproverID;
 	}
 

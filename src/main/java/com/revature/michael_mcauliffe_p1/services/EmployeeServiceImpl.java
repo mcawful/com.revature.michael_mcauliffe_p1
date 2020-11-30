@@ -1,6 +1,7 @@
 package com.revature.michael_mcauliffe_p1.services;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -20,8 +21,12 @@ public class EmployeeServiceImpl implements EmployeeService<Employee> {
 		try {
 			employeeDao = new EmployeeDaoPostgres();
 
-			employeeDao.insertEmployee(employee);
-			return true;
+			if (employeeDao.insertEmployee(employee) > 0)
+				// TODO Add logging
+				return true;
+
+			// TODO Add logging
+			return false;
 		} catch (SQLException e) {
 			// TODO Add logging
 			e.printStackTrace();
@@ -38,7 +43,7 @@ public class EmployeeServiceImpl implements EmployeeService<Employee> {
 
 		try {
 			employeeDao = new EmployeeDaoPostgres();
-
+			// TODO Add logging
 			return employeeDao.updateEmployee(employee);
 		} catch (SQLException e) {
 			// TODO Add logging
@@ -51,19 +56,46 @@ public class EmployeeServiceImpl implements EmployeeService<Employee> {
 	@Override
 	public boolean deleteEmployee(int employeeID) {
 
-		return employeeDao.deleteEmployee(employeeID);
+		try {
+			employeeDao = new EmployeeDaoPostgres();
+			// TODO Add logging
+			return employeeDao.deleteEmployee(employeeID);
+		} catch (SQLException e) {
+			// TODO Add logging
+			e.printStackTrace();
+			return false;
+		}
+
 	}
 
 	@Override
 	public Employee getEmployee(int employeeID) {
+
+		try {
+			employeeDao = new EmployeeDaoPostgres();
+			// TODO Add logging
+			return employeeDao.selectEmployee(employeeID);
+		} catch (SQLException e) {
+			// TODO Add logging
+			e.printStackTrace();
+			return null;
+		}
 		
-		return employeeDao.selectEmployee(employeeID);
 	}
 
 	@Override
 	public List<Employee> getEmployeeList() {
+
+		try {
+			employeeDao = new EmployeeDaoPostgres();
+			// TODO Add logging
+			return employeeDao.selectEmployeeList();
+		} catch (SQLException e) {
+			// TODO Add logging
+			e.printStackTrace();
+			return new ArrayList<Employee>();
+		}
 		
-		return employeeDao.selectEmployeeList();
 	}
 
 	private boolean checkEmployee(Employee employee) {

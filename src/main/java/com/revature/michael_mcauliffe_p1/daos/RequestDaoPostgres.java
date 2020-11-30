@@ -15,28 +15,29 @@ import com.revature.michael_mcauliffe_p1.utils.ConnectionFactoryUtil;
 public class RequestDaoPostgres implements RequestDao<Request> {
 
 	private Connection connection;
-	
+
 	public RequestDaoPostgres() throws SQLException {
-		
+
 		super();
 		this.connection = ConnectionFactoryUtil.getInstance().getConnection();
 	}
-	
+
 	@Override
 	public boolean completeRequest(String formID) {
 
 		String sql = "update request set is_complete = true where request_id = ? returning *;";
-		
-		try(PreparedStatement ps = connection.prepareStatement(sql)) {
-			
+
+		try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
 			ps.setObject(1, formID);
-			
+
 			ResultSet rs = ps.executeQuery();
 			// TODO Add logging
-			if(!rs.next()) return false;
+			if (!rs.next())
+				return false;
 			// TODO Add logging
 			return true;
-			
+
 		} catch (SQLException e) {
 			// TODO Add logging
 			e.printStackTrace();
@@ -48,19 +49,20 @@ public class RequestDaoPostgres implements RequestDao<Request> {
 	public boolean deleteRequest(String formID) {
 
 		String sql = "delete from request where request_id = ? returning *;";
-		
-		try(PreparedStatement ps = connection.prepareStatement(sql)) {
-			
+
+		try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
 			ps.setObject(1, formID);
-			
+
 			ResultSet rs = ps.executeQuery();
-			
+
 			// TODO Add logging
-			if(!rs.next()) return false;
-			
+			if (!rs.next())
+				return false;
+
 			// TODO Add logging
 			return true;
-			
+
 		} catch (SQLException e) {
 			// TODO Add logging
 			e.printStackTrace();
@@ -70,20 +72,21 @@ public class RequestDaoPostgres implements RequestDao<Request> {
 
 	@Override
 	public boolean insertGrade(String formID, byte[] grade) {
-		
+
 		String sql = "update request set grade = ? where request_id = ? returning *;";
-		
-		try(PreparedStatement ps = connection.prepareStatement(sql)) {
-			
+
+		try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
 			ps.setObject(1, grade);
 			ps.setObject(2, formID);
-			
+
 			ResultSet rs = ps.executeQuery();
 			// TODO Add logging
-			if(!rs.next()) return false;
+			if (!rs.next())
+				return false;
 			// TODO Add logging
 			return true;
-			
+
 		} catch (SQLException e) {
 			// TODO Add logging
 			e.printStackTrace();
@@ -98,8 +101,8 @@ public class RequestDaoPostgres implements RequestDao<Request> {
 				+ "location, cost, reimbursement, request_date, event_date_start, event_date_end, grade_format, "
 				+ "grade_format_other, passing_grade_other, grade, is_passing, is_complete) "
 				+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) on conflict do nothing returning *;";
-		
-		try (PreparedStatement ps = connection.prepareStatement(sql)){
+
+		try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
 			ps.setObject(1, request.getFormID());
 			ps.setObject(2, request.getEmployeeID());
@@ -118,13 +121,14 @@ public class RequestDaoPostgres implements RequestDao<Request> {
 			ps.setObject(15, request.getGrade());
 			ps.setObject(16, request.isPassing());
 			ps.setObject(17, request.isComplete());
-			
+
 			ResultSet rs = ps.executeQuery();
 			// TODO Add logging
-			if(!rs.next()) return false;
+			if (!rs.next())
+				return false;
 			// TODO Add logging
 			return true;
-			
+
 		} catch (SQLException e) {
 			// TODO Add logging
 			e.printStackTrace();
@@ -136,14 +140,14 @@ public class RequestDaoPostgres implements RequestDao<Request> {
 	public List<Request> selectAllRequests() {
 
 		String sql = "select * from request;";
-		
-		try(PreparedStatement ps = connection.prepareStatement(sql)) {
-			
+
+		try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
 			ResultSet rs = ps.executeQuery();
-			
+
 			List<Request> requestList = new ArrayList<>();
-			while(rs.next()) {
-				
+			while (rs.next()) {
+
 				Request request = new Request();
 
 				request.setFormID((String) rs.getObject("request_id"));
@@ -168,7 +172,7 @@ public class RequestDaoPostgres implements RequestDao<Request> {
 				requestList.add(request);
 			}
 			return requestList;
-			
+
 		} catch (SQLException e) {
 			// TODO Add logging
 			e.printStackTrace();
@@ -180,15 +184,16 @@ public class RequestDaoPostgres implements RequestDao<Request> {
 	public Request selectRequest(String formID) {
 
 		String sql = "select * from request where request_id = ?;";
-		
+
 		try (PreparedStatement ps = connection.prepareStatement(sql)) {
-			
+
 			ps.setObject(1, formID);
-			
+
 			ResultSet rs = ps.executeQuery();
-			
-			if(!rs.next()) return null;
-			
+
+			if (!rs.next())
+				return null;
+
 			Request request = new Request();
 
 			request.setFormID((String) rs.getObject("request_id"));
@@ -208,30 +213,30 @@ public class RequestDaoPostgres implements RequestDao<Request> {
 			request.setPassingGradeOther((String) rs.getObject("passing_grade_other"));
 			request.setPostingDateAndTime(rs.getTimestamp("request_date").toLocalDateTime());
 			request.setReimbursement(rs.getDouble("reimbursement"));
-			
+
 			return request;
-			
+
 		} catch (SQLException e) {
 			// TODO Add logging
 			e.printStackTrace();
 			return null;
 		}
-		
+
 	}
 
 	@Override
 	public List<Request> selectRequestsByRequester(int employeeID) {
 
 		String sql = "select * from request where employee_id = ?;";
-		
-		try(PreparedStatement ps = connection.prepareStatement(sql)) {
-			
+
+		try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
 			ps.setObject(1, employeeID);
 			ResultSet rs = ps.executeQuery();
-			
+
 			List<Request> requestList = new ArrayList<>();
-			while(rs.next()) {
-				
+			while (rs.next()) {
+
 				Request request = new Request();
 
 				request.setFormID((String) rs.getObject("request_id"));
@@ -256,7 +261,7 @@ public class RequestDaoPostgres implements RequestDao<Request> {
 				requestList.add(request);
 			}
 			return requestList;
-			
+
 		} catch (SQLException e) {
 			// TODO Add logging
 			e.printStackTrace();
@@ -269,18 +274,19 @@ public class RequestDaoPostgres implements RequestDao<Request> {
 	public boolean setPassOrFail(String formID, boolean isPassing) {
 
 		String sql = "update request set is_passing = ? where request_id = ? returning *;";
-		
-		try(PreparedStatement ps = connection.prepareStatement(sql)) {
-			
+
+		try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
 			ps.setObject(1, isPassing);
 			ps.setObject(2, formID);
-			
+
 			ResultSet rs = ps.executeQuery();
 			// TODO Add logging
-			if(!rs.next()) return false;
+			if (!rs.next())
+				return false;
 			// TODO Add logging
 			return true;
-			
+
 		} catch (SQLException e) {
 			// TODO Add logging
 			e.printStackTrace();
@@ -296,8 +302,8 @@ public class RequestDaoPostgres implements RequestDao<Request> {
 				+ "event_date_start = ?, event_date_end = ?, grade_format = ?, grade_format_other = ?, "
 				+ "passing_grade_other = ?, grade = ?, is_passing = ?, is_complete = ? "
 				+ "where request_id = ? returning *;";
-		
-		try (PreparedStatement ps = connection.prepareStatement(sql)){
+
+		try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
 			ps.setObject(1, request.getEmployeeID());
 			ps.setObject(2, request.isUrgent());
@@ -316,13 +322,14 @@ public class RequestDaoPostgres implements RequestDao<Request> {
 			ps.setObject(15, request.isPassing());
 			ps.setObject(16, request.isComplete());
 			ps.setObject(17, request.getFormID());
-			
+
 			ResultSet rs = ps.executeQuery();
 			// TODO Add logging
-			if(!rs.next()) return false;
+			if (!rs.next())
+				return false;
 			// TODO Add logging
 			return true;
-			
+
 		} catch (SQLException e) {
 			// TODO Add logging
 			e.printStackTrace();

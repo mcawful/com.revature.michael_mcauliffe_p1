@@ -4,7 +4,7 @@ public class Login implements Credentials {
 
 	private String username, password;
 	private int employeeID;
-	
+
 	public Login() {
 		super();
 		this.employeeID = 0;
@@ -21,31 +21,31 @@ public class Login implements Credentials {
 
 	@Override
 	public int getID() {
-		
+
 		return this.employeeID;
 	}
 
 	@Override
 	public String getUsername() {
-		
+
 		return this.username;
 	}
 
 	@Override
 	public String getPassword() {
-		
+
 		return this.password;
 	}
 
 	@Override
 	public void setID(int employeeID) {
-		
+
 		this.employeeID = employeeID;
 	}
 
 	@Override
 	public void setUsername(String username) {
-		
+
 		this.username = username;
 	}
 
@@ -53,7 +53,7 @@ public class Login implements Credentials {
 	// Strongly suggest using up to date hashing algorithms for password storage
 	@Override
 	public void setPassword(String password) {
-		
+
 		this.password = password;
 	}
 

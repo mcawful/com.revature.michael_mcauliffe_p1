@@ -5,18 +5,18 @@ public class RequestAttachment implements Attachment {
 	private int attachmentID;
 	private String requestID, description;
 	private byte[] file;
-	
+
 	public RequestAttachment() {
-		
+
 		super();
 		this.requestID = "";
 		this.file = null;
 		this.description = "";
-		
+
 	}
 
 	public RequestAttachment(String requestID, byte[] file, String description) {
-		
+
 		super();
 		this.requestID = requestID;
 		this.file = file;
@@ -25,45 +25,45 @@ public class RequestAttachment implements Attachment {
 
 	@Override
 	public byte[] getFile() {
-		
+
 		return this.file;
 	}
 
 	@Override
 	public String getDescription() {
-		
+
 		return this.description;
 	}
 
 	public int getAttachmentID() {
-		
+
 		return attachmentID;
 	}
 
 	public String getRequestID() {
-		
+
 		return requestID;
 	}
 
 	@Override
 	public void setFile(byte[] file) {
-		
+
 		this.file = file;
 	}
 
 	@Override
 	public void setDescription(String description) {
-		
+
 		this.description = description;
 	}
 
 	public void setAttachmentID(int attachmentID) {
-		
+
 		this.attachmentID = attachmentID;
 	}
 
 	public void setRequestID(String requestID) {
-		
+
 		this.requestID = requestID;
 	}
 

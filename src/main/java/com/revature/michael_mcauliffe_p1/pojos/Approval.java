@@ -3,23 +3,23 @@ package com.revature.michael_mcauliffe_p1.pojos;
 import java.time.LocalDateTime;
 
 public interface Approval {
-	
+
 	public Boolean getFinalApproval();
-	
+
 	public LocalDateTime getFinalApprovalDateAndTime();
-	
+
 	public int getFinalApproverID();
-	
+
 	public Boolean getFirstApproval();
-	
+
 	public LocalDateTime getFirstApprovalDateAndTime();
-	
+
 	public int getFirstApproverID();
-	
+
 	public Boolean getSecondApproval();
-	
+
 	public LocalDateTime getSecondApprovalDateAndTime();
-	
+
 	public int getSecondApproverID();
 
 	public void setFinalApproval(Boolean approval);

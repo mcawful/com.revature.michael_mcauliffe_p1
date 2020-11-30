@@ -19,14 +19,20 @@ public class EmployeeControllerImpl implements EmployeeController<Employee> {
 
 		try {
 			Employee employee = makeEmployee(ctx);
-			if (employeeService.addEmployee(employee))
+			if (employeeService.addEmployee(employee)) {
+				ctx.html("Employee added successfully");
+				ctx.status(201);
 				return true;
+			}
 		} catch (Exception e) {
 			// TODO Add logging
 			e.printStackTrace();
+			ctx.status(400);
 			return false;
 		}
 
+		ctx.html("Could not add employee");
+		ctx.status(400);
 		return false;
 
 	}
@@ -36,14 +42,19 @@ public class EmployeeControllerImpl implements EmployeeController<Employee> {
 
 		try {
 			Employee employee = makeEmployee(ctx);
-			if (employeeService.updateEmployee(employee))
+			if (employeeService.updateEmployee(employee)) {
+				ctx.html("Employee updated successfully");
+				ctx.status(200);
 				return true;
+			}
 		} catch (Exception e) {
 			// TODO Add logging
 			e.printStackTrace();
+			ctx.status(400);
 			return false;
 		}
-
+		ctx.html("Could not update employee");
+		ctx.status(400);
 		return false;
 	}
 
@@ -52,14 +63,20 @@ public class EmployeeControllerImpl implements EmployeeController<Employee> {
 
 		try {
 			int employeeID = Integer.parseInt(ctx.formParam("employeeID"));
-			if (employeeService.deleteEmployee(employeeID))
+			if (employeeService.deleteEmployee(employeeID)) {
+				ctx.html("Employee deleted successfully");
+				ctx.status(200);
 				return true;
+			}
 		} catch (Exception e) {
 			// TODO Add logging
 			e.printStackTrace();
+			ctx.status(400);
 			return false;
 		}
 
+		ctx.html("Could not find selected employee to delete");
+		ctx.status(400);
 		return false;
 	}
 
@@ -68,10 +85,21 @@ public class EmployeeControllerImpl implements EmployeeController<Employee> {
 
 		try {
 			int employeeID = Integer.parseInt(ctx.formParam("employeeID"));
-			return employeeService.getEmployee(employeeID);
+			Employee employee = employeeService.getEmployee(employeeID);
+			if(employee != null) {
+				ctx.html("Selected Employee:\n"
+						+ "Employee ID: " + employee.getEmployeeID() + "\n"
+						+ "Name: " + employee.getFirstName() + " " + employee.getLastName() + "\n"
+						+ "Job Title: " + employee.getJobTitle().toString());
+				return employee;
+			}
+			ctx.html("Employee not found");
+			ctx.status(400);
+			return null;
 		} catch (Exception e) {
 			// TODO Add logging
 			e.printStackTrace();
+			ctx.status(400);
 			return null;
 		}
 

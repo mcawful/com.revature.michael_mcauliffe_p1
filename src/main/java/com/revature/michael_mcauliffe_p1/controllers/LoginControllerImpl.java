@@ -15,14 +15,20 @@ public class LoginControllerImpl implements LoginController<Login> {
 
 		try {
 			Login login = makeLogin(ctx);
-			if (loginService.addLogin(login))
+			if (loginService.addLogin(login)) {
+				ctx.html("New login creation successful");
+				ctx.status(201);
 				return true;
+			}
 		} catch (Exception e) {
 			// TODO Add logging
 			e.printStackTrace();
+			ctx.status(400);
 			return false;
 		}
-
+		
+		ctx.html("Username already exists");
+		ctx.status(200);
 		return false;
 	}
 
@@ -31,13 +37,21 @@ public class LoginControllerImpl implements LoginController<Login> {
 
 		try {
 			Login login = makeLogin(ctx);
-			if (loginService.updateLogin(login))
+			if (loginService.updateLogin(login)) {
+				
+				ctx.html("Login information updated");
+				ctx.status(200);
 				return true;
+			}
 		} catch (Exception e) {
 			// TODO Add logging
 			e.printStackTrace();
+			ctx.status(400);
 			return false;
 		}
+		
+		ctx.html("Login information cound not be updated");
+		ctx.status(200);
 		return false;
 	}
 
@@ -46,28 +60,44 @@ public class LoginControllerImpl implements LoginController<Login> {
 
 		try {
 			int employeeID = Integer.parseInt(ctx.formParam("employeeID"));
-			if (loginService.deleteLogin(employeeID))
+			if (loginService.deleteLogin(employeeID)) {
+				ctx.html("Login information deleted");
+				ctx.status(200);
 				return true;
+			}
 		} catch (Exception e) {
 			// TODO Add logging
 			e.printStackTrace();
+			ctx.status(400);
 			return false;
 		}
-
+		ctx.html("Login information not found for that employee");
+		ctx.status(200);
 		return false;
 	}
 
 	@Override
 	public boolean getVerifyLogin(Context ctx) {
-		
+
 		try {
 			String username = ctx.formParam("username");
 			String password = ctx.formParam("password");
 			String storedHash = loginService.getLoginByUsername(username).getPassword();
-			return HashAndVerifyUtil.verify(password, storedHash);
+
+			boolean success = HashAndVerifyUtil.verify(password, storedHash);
+			if (success) {
+				ctx.html("Login successful");
+				ctx.status(200);
+				return true;
+			}
+			ctx.html("Incorrect login");
+			ctx.status(401);
+			return false;
+
 		} catch (Exception e) {
 			// TODO Add logging
 			e.printStackTrace();
+			ctx.status(400);
 			return false;
 		}
 	}
@@ -81,6 +111,7 @@ public class LoginControllerImpl implements LoginController<Login> {
 		} catch (Exception e) {
 			// TODO Add logging
 			e.printStackTrace();
+			ctx.status(400);
 			return null;
 		}
 	}
@@ -94,6 +125,7 @@ public class LoginControllerImpl implements LoginController<Login> {
 		} catch (Exception e) {
 			// TODO Add logging
 			e.printStackTrace();
+			ctx.status(400);
 			return null;
 		}
 	}
@@ -102,7 +134,7 @@ public class LoginControllerImpl implements LoginController<Login> {
 
 		int employeeID = Integer.valueOf(ctx.formParam("employeeID"));
 		String username = ctx.formParam("username");
-		String password = HashAndVerifyUtil.hash(ctx.formParam(ctx.formParam("password")));
+		String password = HashAndVerifyUtil.hash(ctx.formParam("password"));
 
 		Login login = new Login(username, password, employeeID);
 

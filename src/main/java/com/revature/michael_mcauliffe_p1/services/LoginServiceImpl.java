@@ -4,7 +4,6 @@ import java.sql.SQLException;
 
 import com.revature.michael_mcauliffe_p1.daos.LoginDaoPostgres;
 import com.revature.michael_mcauliffe_p1.pojos.Login;
-import com.revature.michael_mcauliffe_p1.utils.HashAndVerifyUtil;
 
 public class LoginServiceImpl implements LoginService<Login> {
 

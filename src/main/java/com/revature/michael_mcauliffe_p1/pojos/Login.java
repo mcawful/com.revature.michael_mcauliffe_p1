@@ -14,7 +14,7 @@ public class Login implements Credentials {
 
 	public Login(String username, String password, int employeeID) {
 		super();
-		this.username = username;
+		this.username = username.toLowerCase();
 		this.password = password;
 		this.employeeID = employeeID;
 	}
@@ -46,7 +46,7 @@ public class Login implements Credentials {
 	@Override
 	public void setUsername(String username) {
 
-		this.username = username;
+		this.username = username.toLowerCase();
 	}
 
 	// Using this method to store passwords in plain text is NOT recommended

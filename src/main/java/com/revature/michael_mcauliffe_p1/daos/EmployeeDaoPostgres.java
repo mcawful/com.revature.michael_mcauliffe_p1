@@ -140,20 +140,20 @@ public class EmployeeDaoPostgres implements EmployeeDao<Employee> {
 
 			Employee employee = new Employee();
 
-			employee.setEmployeeID((Integer) rs.getObject("employee_id"));
-			employee.setJobTitle(JobTitle.valueOf(rs.getObject("job_title").toString()));
-			employee.setDepartment(Department.valueOf(rs.getObject("department").toString()));
-			employee.setBenCo((Boolean) rs.getObject("is_ben_co"));
-			employee.setFirstName((String) rs.getObject("first_name"));
-			employee.setLastName((String) rs.getObject("last_name"));
-			employee.setAddress((String) rs.getObject("address"));
-			employee.setCity((String) rs.getObject("city"));
-			employee.setState((String) rs.getObject("state"));
-			employee.setPostalCode((String) rs.getObject("postal_code"));
-			employee.setPhoneNumber((String) rs.getObject("phone_number"));
-			employee.setEmail((String) rs.getObject("email"));
-			employee.setReportsTo((Integer) rs.getObject("reports_to"));
-			employee.setAdminLevel((Integer) rs.getObject("admin_level"));
+			employee.setEmployeeID(rs.getInt("employee_id"));
+			employee.setJobTitle(JobTitle.valueOf(rs.getString("job_title")));
+			employee.setDepartment(Department.valueOf(rs.getString("department")));
+			employee.setBenCo(rs.getBoolean("is_ben_co"));
+			employee.setFirstName(rs.getString("first_name"));
+			employee.setLastName(rs.getString("last_name"));
+			employee.setAddress(rs.getString("address"));
+			employee.setCity(rs.getString("city"));
+			employee.setState(rs.getString("state"));
+			employee.setPostalCode(rs.getString("postal_code"));
+			employee.setPhoneNumber(rs.getString("phone_number"));
+			employee.setEmail(rs.getString("email"));
+			employee.setReportsTo(rs.getInt("reports_to"));
+			employee.setAdminLevel(rs.getInt("admin_level"));
 
 			// TODO Add logging
 			return employee;
@@ -179,20 +179,20 @@ public class EmployeeDaoPostgres implements EmployeeDao<Employee> {
 
 				Employee employee = new Employee();
 
-				employee.setEmployeeID((Integer) rs.getObject("employee_id"));
-				employee.setJobTitle(JobTitle.valueOf(rs.getObject("job_title").toString()));
-				employee.setDepartment(Department.valueOf(rs.getObject("department").toString()));
-				employee.setBenCo((Boolean) rs.getObject("is_ben_co"));
-				employee.setFirstName((String) rs.getObject("first_name"));
-				employee.setLastName((String) rs.getObject("last_name"));
-				employee.setAddress((String) rs.getObject("address"));
-				employee.setCity((String) rs.getObject("city"));
-				employee.setState((String) rs.getObject("state"));
-				employee.setPostalCode((String) rs.getObject("postal_code"));
-				employee.setPhoneNumber((String) rs.getObject("phone_number"));
-				employee.setEmail((String) rs.getObject("email"));
-				employee.setReportsTo((Integer) rs.getObject("reports_to"));
-				employee.setAdminLevel((Integer) rs.getObject("admin_level"));
+				employee.setEmployeeID(rs.getInt("employee_id"));
+				employee.setJobTitle(JobTitle.valueOf(rs.getString("job_title")));
+				employee.setDepartment(Department.valueOf(rs.getString("department")));
+				employee.setBenCo(rs.getBoolean("is_ben_co"));
+				employee.setFirstName(rs.getString("first_name"));
+				employee.setLastName(rs.getString("last_name"));
+				employee.setAddress(rs.getString("address"));
+				employee.setCity(rs.getString("city"));
+				employee.setState(rs.getString("state"));
+				employee.setPostalCode(rs.getString("postal_code"));
+				employee.setPhoneNumber(rs.getString("phone_number"));
+				employee.setEmail(rs.getString("email"));
+				employee.setReportsTo(rs.getInt("reports_to"));
+				employee.setAdminLevel(rs.getInt("admin_level"));
 
 				// TODO Add logging
 				employeeList.add(employee);

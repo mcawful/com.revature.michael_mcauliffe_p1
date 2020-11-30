@@ -14,7 +14,7 @@ public interface RequestController<T> {
 	
 	public T getRequest(Context ctx);
 	
-	public List<T> getAllRequest();
+	public List<T> getAllRequests();
 	
 	public List<T> getRequestsBySearch(Context ctx);
 	

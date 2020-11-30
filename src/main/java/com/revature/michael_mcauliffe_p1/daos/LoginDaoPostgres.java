@@ -112,9 +112,9 @@ public class LoginDaoPostgres implements LoginDao<Login> {
 
 			Login login = new Login();
 
-			login.setID((Integer) rs.getObject("employee_id"));
-			login.setUsername((String) rs.getObject("username"));
-			login.setPassword((String) rs.getObject("password"));
+			login.setID(rs.getInt("employee_id"));
+			login.setUsername(rs.getString("username"));
+			login.setPassword(rs.getString("password"));
 
 			// TODO Add logging
 			return login;
@@ -143,9 +143,9 @@ public class LoginDaoPostgres implements LoginDao<Login> {
 
 			Login login = new Login();
 
-			login.setID((Integer) rs.getObject("employee_id"));
-			login.setUsername((String) rs.getObject("username"));
-			login.setPassword((String) rs.getObject("password"));
+			login.setID(rs.getInt("employee_id"));
+			login.setUsername(rs.getString("username"));
+			login.setPassword(rs.getString("password"));
 
 			// TODO Add logging
 			return login;
@@ -173,10 +173,9 @@ public class LoginDaoPostgres implements LoginDao<Login> {
 
 				Login login = new Login();
 
-				login.setID((Integer) rs.getObject("employee_id"));
-				login.setUsername((String) rs.getObject("username"));
-				login.setPassword((String) rs.getObject("password"));
-				;
+				login.setID(rs.getInt("employee_id"));
+				login.setUsername(rs.getString("username"));
+				login.setPassword(rs.getString("password"));
 
 				loginList.add(login);
 			}

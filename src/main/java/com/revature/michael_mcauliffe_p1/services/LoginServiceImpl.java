@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import com.revature.michael_mcauliffe_p1.daos.LoginDaoPostgres;
 import com.revature.michael_mcauliffe_p1.pojos.Login;
+import com.revature.michael_mcauliffe_p1.utils.HashAndVerifyUtil;
 
 public class LoginServiceImpl implements LoginService<Login> {
 
@@ -14,7 +15,7 @@ public class LoginServiceImpl implements LoginService<Login> {
 
 		if (!checkLogin(login))
 			return false;
-
+		
 		try {
 			loginDao = new LoginDaoPostgres();
 			// TODO Add logging
@@ -32,7 +33,7 @@ public class LoginServiceImpl implements LoginService<Login> {
 
 		if (!checkLogin(login))
 			return false;
-
+		
 		try {
 			loginDao = new LoginDaoPostgres();
 			// TODO Add logging
@@ -57,7 +58,7 @@ public class LoginServiceImpl implements LoginService<Login> {
 			return false;
 		}
 	}
-
+	
 	@Override
 	public Login getLoginByID(int employeeID) {
 

@@ -9,6 +9,8 @@ public interface LoginController<T> {
 	public boolean updateLogin(Context ctx);
 
 	public boolean deleteLogin(Context ctx);
+	
+	public boolean getVerifyLogin(Context ctx);
 
 	public T getLoginByID(Context ctx);
 

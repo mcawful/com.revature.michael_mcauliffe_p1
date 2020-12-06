@@ -1,3 +1,11 @@
+#error {
+    display:none;
+}
+
+#error:target {
+    display:block;
+}
+
 #mainBody, #sideBar {
     background-color: lightgrey;
     border-radius: 10px;

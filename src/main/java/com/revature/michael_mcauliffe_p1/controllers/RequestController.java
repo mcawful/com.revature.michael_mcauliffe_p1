@@ -4,16 +4,16 @@ import io.javalin.http.Context;
 
 public interface RequestController<T> {
 
-	public boolean postRequest(Context ctx);
+	public void postRequest(Context ctx);
 	
-	public boolean updateRequest(Context ctx);
+	public void updateRequest(Context ctx);
 	
-	public boolean deleteRequest(Context ctx);
+	public void deleteRequest(Context ctx);
 	
-	public boolean getRequest(Context ctx);
+	public void getRequest(Context ctx);
 	
-	public boolean getAllRequests();
+	public void getAllRequests();
 	
-	public boolean getRequestsBySearch(Context ctx);
+	public void getRequestsBySearch(Context ctx);
 	
 }

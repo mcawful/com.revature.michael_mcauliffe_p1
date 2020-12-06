@@ -7,6 +7,8 @@ let gradeDropdown = document.getElementById("gradeDropdown");
 let otherGradeTypeInput = document.getElementById("otherGradeTypeInput");
 let startDateInput = document.getElementById("startDateInput");
 let endDateInput = document.getElementById("endDateInput");
+let otherPassingGradeType = document.getElementById("otherPassingGrade");
+let otherPassingGradeInput = document.getElementById("otherPassingGradeInput");
 let startDate = new Date();
 
 window.addEventListener("load", (event) => {
@@ -16,10 +18,13 @@ window.addEventListener("load", (event) => {
 startDateInput.addEventListener("change", (event) => {
   let endDate = new Date(startDateInput.value);
   let currentEndDate = new Date(endDateInput.value);
-  if(currentEndDate > endDate) endDate = currentEndDate;
   endDate.setDate(endDate.getDate() + 1);
+  currentEndDate.setDate(currentEndDate.getDate() + 1);
   endDateInput.setAttribute("min", dateToString(endDate));
   endDateInput.value = dateToString(endDate);
+  if (currentEndDate > endDate) {
+    endDateInput.value = dateToString(currentEndDate);
+  }
   endDateInput.disabled = false;
 });
 
@@ -29,6 +34,7 @@ eventDropdown.addEventListener("change", (change) => {
 
 gradeDropdown.addEventListener("change", (change) => {
   handleOtherToggle(gradeDropdown, otherGradeType, otherGradeTypeInput);
+  handleOtherToggle(gradeDropdown, otherPassingGradeType, otherPassingGradeInput);
 });
 
 function dateToString(date) {
@@ -54,11 +60,11 @@ function handleOtherToggle(dropdown, type, input) {
 
   if (dropdown.value == "OTHER") {
     type.style.display = "block";
-    type.required = true;
+    input.required = true;
   }
-  else {
+  else if (dropdown.value != "OTHER") {
     type.style.display = "none";
-    type.required = false;
+    input.required = false;
     input.value = null;
   }
 }

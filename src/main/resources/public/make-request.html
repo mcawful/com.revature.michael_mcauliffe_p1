@@ -48,7 +48,7 @@
             <h1 class="item1" id="mainHeader" style="text-align: center;">TRMS Dashboard</h1>
 
             <div class="item2" id="topTabs" style="margin-left: 10px;"">
-                <a href="/dashboard" style="text-decoration: none;">
+                <a href=" /dashboard" style="text-decoration: none;">
                 <div class="tab" id="homeTab">Home</div>
                 </a>
                 <div class="tab" id="makeRequestTab">Make Request</div>
@@ -87,11 +87,11 @@
                     </div>
                     <div id="eventStartDate">
                         <label for="startDateCalendar">Event start date:</label>
-                        <input name="startDateCalendar" id="startDateInput" type="date" required>
+                        <input name="startDateCalendar" id="startDateInput" type="date" onkeydown="return false" required>
                     </div>
                     <div id="eventEndDate">
                         <label for="endDateCalendar">Event end date:</label>
-                        <input name="endDateCalendar" id="endDateInput" type="date" required>
+                        <input name="endDateCalendar" id="endDateInput" type="date" onkeydown="return false" disabled required>
                     </div>
                     <div id="eventCost">
                         <label for="eventCost">Event cost:</label>

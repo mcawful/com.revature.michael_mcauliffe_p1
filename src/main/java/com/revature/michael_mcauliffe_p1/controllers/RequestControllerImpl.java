@@ -26,8 +26,7 @@ public class RequestControllerImpl implements RequestController<Request> {
 		String otherEventType = ctx.formParam("otherEventType");
 		String otherGradeFormat = ctx.formParam("otherGradeType");
 		String passingGradeOther = ctx.formParam("passingGradeOther");
-		
-		int employeeID = 1;
+		int employeeID = ctx.cookieStore("auth");
 		double cost = Double.parseDouble(ctx.formParam("eventCost").replaceAll("[$,]", ""));
 		boolean isUrgent;
 		if(postingDateAndTime.plusWeeks(2).isAfter(eventDateStart)) {

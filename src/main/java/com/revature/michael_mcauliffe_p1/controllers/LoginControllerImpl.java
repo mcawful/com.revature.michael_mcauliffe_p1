@@ -85,15 +85,20 @@ public class LoginControllerImpl implements LoginController<Login> {
 		try {
 			String username = ctx.formParam("username");
 			String password = ctx.formParam("password");
+			
+			Login login = loginService.getLoginByUsername(username);
+			
+			if(login != null) {
+				String storedHash = login.getPassword();
 
-			String storedHash = loginService.getLoginByUsername(username).getPassword();
-
-			boolean success = HashAndVerifyUtil.verify(password, storedHash, HashAndVerifyUtil.Strength.HIGH);
-			if (success) {
-				ctx.cookieStore("auth", username);
-				ctx.redirect("/dashboard.html");
-				return true;
+				boolean success = HashAndVerifyUtil.verify(password, storedHash, HashAndVerifyUtil.Strength.HIGH);
+				if (success) {
+					ctx.cookieStore("auth", login.getID());
+					ctx.redirect("/dashboard.html");
+					return true;
+				}
 			}
+			
 			ctx.redirect("/login.html#badLogin");
 			return false;
 

@@ -5,10 +5,12 @@ import java.time.LocalDateTime;
 public interface Form {
 
 	public double getCost();
-
+	
 	public String getDescription();
-
+	
 	public int getEmployeeID();
+
+	public LocalDateTime getEventDateEnd();
 
 	public LocalDateTime getEventDateStart();
 
@@ -21,6 +23,8 @@ public interface Form {
 	public GradeFormat getGradeFormat();
 
 	public String getLocation();
+
+	public String getOtherEventType();
 
 	public String getOtherGradeFormat();
 
@@ -58,7 +62,11 @@ public interface Form {
 
 	public void setIsUrgent(boolean isUrgent);
 
+	public void setLocalDateEnd(LocalDateTime date);
+
 	public void setLocation(String location);
+
+	public void setOtherEventType(String otherEventType);
 
 	public void setOtherGradeFormat(String otherGradeFormat);
 
@@ -67,8 +75,4 @@ public interface Form {
 	public void setPostingDateAndTime(LocalDateTime date);
 
 	public void setReimbursement(double reimbursement);
-
-	public LocalDateTime getEventDateEnd();
-
-	public void setLocalDateEnd(LocalDateTime date);
 }

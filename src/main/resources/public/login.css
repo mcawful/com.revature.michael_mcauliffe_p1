@@ -1,0 +1,44 @@
+#badLogin {
+    display: none;
+}
+
+#badLogin:target {
+    display: block;
+}
+
+#loginBox {
+    background-color: lightgrey;
+    border-radius: 10px;
+}
+
+#loginInputs {
+    width: 90%;
+}
+
+#loginHeader {
+    padding-top: 20px;
+}
+ 
+#username, #password {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    margin-bottom: 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}

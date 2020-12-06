@@ -5,12 +5,14 @@ import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 
 public class Request implements Form {
 
 	private double cost, reimbursement;
 	private String description, location, formID;
 	private EventType eventType;
+	private String otherEventType;
 	private int employeeID;
 	private LocalDateTime eventDateStart, eventDateEnd, postingDateAndTime;
 	private GradeFormat gradeFormat;
@@ -26,6 +28,7 @@ public class Request implements Form {
 		this.reimbursement = 0.00;
 		this.description = "";
 		this.eventType = null;
+		this.otherEventType = "";
 		this.location = "";
 		this.employeeID = -1;
 		this.eventDateStart = null;
@@ -50,6 +53,7 @@ public class Request implements Form {
 		this.reimbursement = calculateReimbursement(cost, eventType);
 		this.description = description;
 		this.eventType = eventType;
+		this.otherEventType = "";
 		this.location = location;
 		this.employeeID = employeeID;
 		this.eventDateStart = eventDateStart.truncatedTo(ChronoUnit.MILLIS);
@@ -123,6 +127,10 @@ public class Request implements Form {
 	public String getLocation() {
 
 		return this.location;
+	}
+
+	public String getOtherEventType() {
+		return otherEventType;
 	}
 
 	@Override
@@ -245,6 +253,10 @@ public class Request implements Form {
 		this.location = location;
 	}
 
+	public void setOtherEventType(String otherEventType) {
+		this.otherEventType = otherEventType;
+	}
+
 	@Override
 	public void setOtherGradeFormat(String otherGradeFormat) {
 
@@ -337,11 +349,13 @@ public class Request implements Form {
 		result = prime * result + ((eventDateStart == null) ? 0 : eventDateStart.hashCode());
 		result = prime * result + ((eventType == null) ? 0 : eventType.hashCode());
 		result = prime * result + ((formID == null) ? 0 : formID.hashCode());
+		result = prime * result + Arrays.hashCode(grade);
 		result = prime * result + ((gradeFormat == null) ? 0 : gradeFormat.hashCode());
 		result = prime * result + (isComplete ? 1231 : 1237);
 		result = prime * result + ((isPassing == null) ? 0 : isPassing.hashCode());
 		result = prime * result + (isUrgent ? 1231 : 1237);
 		result = prime * result + ((location == null) ? 0 : location.hashCode());
+		result = prime * result + ((otherEventType == null) ? 0 : otherEventType.hashCode());
 		result = prime * result + ((otherGradeFormat == null) ? 0 : otherGradeFormat.hashCode());
 		result = prime * result + ((passingGradeOther == null) ? 0 : passingGradeOther.hashCode());
 		result = prime * result + ((postingDateAndTime == null) ? 0 : postingDateAndTime.hashCode());
@@ -385,6 +399,8 @@ public class Request implements Form {
 				return false;
 		} else if (!formID.equals(other.formID))
 			return false;
+		if (!Arrays.equals(grade, other.grade))
+			return false;
 		if (gradeFormat != other.gradeFormat)
 			return false;
 		if (isComplete != other.isComplete)
@@ -400,6 +416,11 @@ public class Request implements Form {
 			if (other.location != null)
 				return false;
 		} else if (!location.equals(other.location))
+			return false;
+		if (otherEventType == null) {
+			if (other.otherEventType != null)
+				return false;
+		} else if (!otherEventType.equals(other.otherEventType))
 			return false;
 		if (otherGradeFormat == null) {
 			if (other.otherGradeFormat != null)
@@ -423,9 +444,13 @@ public class Request implements Form {
 
 	@Override
 	public String toString() {
-		return "Request [cost=" + cost + ", reimbursement=" + reimbursement + ", formID=" + formID + ", eventType="
-				+ eventType + ", employeeID=" + employeeID + ", eventDateStart=" + eventDateStart + ", eventDateEnd="
-				+ eventDateEnd + ", isUrgent=" + isUrgent + ", isComplete=" + isComplete + "]";
+		return "Request [cost=" + cost + ", reimbursement=" + reimbursement + ", description=" + description
+				+ ", location=" + location + ", formID=" + formID + ", eventType=" + eventType + ", otherEventType="
+				+ otherEventType + ", employeeID=" + employeeID + ", eventDateStart=" + eventDateStart
+				+ ", eventDateEnd=" + eventDateEnd + ", postingDateAndTime=" + postingDateAndTime + ", gradeFormat="
+				+ gradeFormat + ", otherGradeFormat=" + otherGradeFormat + ", passingGradeOther=" + passingGradeOther
+				+ ", grade=" + Arrays.toString(grade) + ", isUrgent=" + isUrgent + ", isComplete=" + isComplete
+				+ ", isPassing=" + isPassing + "]";
 	}
-
+	
 }

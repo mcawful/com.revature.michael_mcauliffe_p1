@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="main-style.css">
+    <link rel="stylesheet" href="make-request.css">
+    <style>
+        .item1 {
+            grid-area: header;
+        }
+
+        .item2 {
+            grid-area: tab;
+        }
+
+        .item3 {
+            grid-area: main;
+        }
+
+        .item4 {
+            grid-area: side;
+        }
+
+        .item5 {
+            grid-area: footer;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-areas:
+                'header header header header header header header header'
+                'tab tab tab tab tab tab tab tab'
+                'main main main main main main side side'
+                'footer footer footer footer footer footer footer footer';
+        }
+    </style>
+    <title>TRMS Make Request</title>
+</head>
+
+<body>
+    <div id="page" style="margin: auto; width: 800px;">
+
+        <div class="grid-container" id="bodyContainer">
+
+            <h1 class="item1" id="mainHeader" style="text-align: center;">TRMS Dashboard</h1>
+
+            <div class="item2" id="topTabs" style="margin-left: 10px;"">
+                <a href="/dashboard" style="text-decoration: none;">
+                <div class="tab" id="homeTab">Home</div>
+                </a>
+                <div class="tab" id="makeRequestTab">Make Request</div>
+                <div class="tab" id="pendingRequestTab">Pending Requests</div>
+                <div class="tab" id="completedRequestTab">Completed Requests</div>
+            </div>
+            <div class="item3" id="mainBody" style="width: 580px;">
+                <h3 id="makeRequestHeader" style="text-align: center;">
+                    Reimbursement Request Form
+                </h3>
+                <form id="makeRequestForm" style="margin: 20px;" action="/request/make" method="POST">
+                    <div id="eventType">
+                        <label for="eventDropdown">Event type:</label>
+                        <select name="eventDropdown" id="eventDropdown" required>
+                            <option disabled selected>Select event type</option>
+                            <option value="CERTIFICATION">Certification</option>
+                            <option value="TECHNICAL_TRAINING">Technical training</option>
+                            <option value="UNIVERSITY_COURSE">University course</option>
+                            <option value="PREPERATION_CLASS">Preperation class</option>
+                            <option value="SEMINAR">Seminar</option>
+                            <option value="OTHER" id="eventOther">Other</option>
+                        </select>
+                    </div>
+                    <div id="otherEventType" hidden>
+                        <label for="otherEventType">Other event type:</label>
+                        <input name="otherEventType" id="otherEventTypeInput" maxlength="50">
+                    </div>
+                    <div id="eventDescription">
+                        <label for="eventDescription">Event description:</label>
+                        <textarea name="eventDescription" id="descriptionTextArea" maxlength="255" style="resize: none;"
+                            required></textarea>
+                    </div>
+                    <div id="eventLocation">
+                        <label for="eventLocation">Event location:</label>
+                        <input type="text" id="locationInput" name="location" maxlength="50" required>
+                    </div>
+                    <div id="eventStartDate">
+                        <label for="startDateCalendar">Event start date:</label>
+                        <input name="startDateCalendar" id="startDateInput" type="date" required>
+                    </div>
+                    <div id="eventEndDate">
+                        <label for="endDateCalendar">Event end date:</label>
+                        <input name="endDateCalendar" id="endDateInput" type="date" required>
+                    </div>
+                    <div id="eventCost">
+                        <label for="eventCost">Event cost:</label>
+                        <input name="eventCost" id="costInput" type="currency" required>
+                    </div>
+                    <div id="gradeType">
+                        <label for="gradeType">Grading schema:</label>
+                        <select name="gradeType" id="gradeDropdown" required>
+                            <option disabled selected>Select schema</option>
+                            <option value="LETTER">Letter</option>
+                            <option value="PERCENTAGE">Percentage</option>
+                            <option value="NUMBER">Number</option>
+                            <option value="PASS_FAIL">Pass/Fail</option>
+                            <option value="OTHER">Other</option>
+                        </select>
+                    </div>
+                    <div id="otherGradeType" hidden>
+                        <label for="otherGradeType">Other grading schema:</label>
+                        <input name="otherGradeType" id="otherGradeTypeInput" maxlength="50">
+                    </div>
+                    <div id="formSubmit">
+                        <button type="submit" id="formSubmitButton">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="item4" id="sideBar" style=" width: 220px;">
+                <div class="links" style="margin: auto; text-align: center; padding-top: 20px;">
+                    <a href="/logout" id="logout">Logout</a>
+                </div>
+            </div>
+        </div>
+
+        <footer class="item5" id="mainFooter" style="text-align: center;">Designer: Michael McAuliffe | Company:
+            Revature | &#169;
+            2020</footer>
+    </div>
+
+    <script src="make-request.js"></script>
+</body>
+
+</html>

@@ -3,3 +3,6 @@
 
 # Ignore Gradle build output directory
 build
+
+# Ignore mode_module directory
+src/main/resources/node_modules/

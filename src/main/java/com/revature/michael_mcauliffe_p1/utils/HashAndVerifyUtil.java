@@ -11,22 +11,35 @@ import javax.crypto.spec.PBEKeySpec;
 
 public class HashAndVerifyUtil {
 
-	public static String hash(String input) {
+	public static String hash(String input) throws NoSuchAlgorithmException, InvalidKeySpecException {
+
+		return hash(input, Strength.STANDARD);
+	}
+
+	public static String hash(String input, Strength strength)
+			throws NoSuchAlgorithmException, InvalidKeySpecException {
 
 		byte[] salt = makeSalt();
 
-		byte[] hash = makeHash(input, salt);
+		byte[] hash = makeHash(input, salt, strength);
 
 		String output = byteArrToString(salt) + byteArrToString(hash);
 
 		return output;
 	}
 
-	public static boolean verify(String input, String storedHash) {
+	public static boolean verify(String input, String storedHash)
+			throws NoSuchAlgorithmException, InvalidKeySpecException {
+
+		return verify(input, storedHash, Strength.STANDARD);
+	}
+
+	public static boolean verify(String input, String storedHash, Strength strength)
+			throws NoSuchAlgorithmException, InvalidKeySpecException {
 
 		byte[] salt = stringToByteArr(storedHash.substring(0, 24));
 
-		byte[] hash = makeHash(input, salt);
+		byte[] hash = makeHash(input, salt, strength);
 
 		String output = byteArrToString(salt) + byteArrToString(hash);
 
@@ -37,28 +50,29 @@ public class HashAndVerifyUtil {
 			return false;
 	}
 
-	private static byte[] makeHash(String input, byte[] salt) {
+	public static enum Strength {
+		LOW, STANDARD, HIGH
+	}
 
-		KeySpec spec = new PBEKeySpec(input.toCharArray(), salt, 65536, 512);
-		SecretKeyFactory factory = null;
-		try {
-			factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Add logging
-			e.printStackTrace();
-			return null;
+	private static int encryptionLevel(Strength strength) {
+
+		switch (strength) {
+		case LOW:
+			return 128;
+		default:
+			return 256;
+		case HIGH:
+			return 512;
 		}
+	}
 
-		byte[] hash = null;
-		try {
-			hash = factory.generateSecret(spec).getEncoded();
-		} catch (InvalidKeySpecException e) {
-			// TODO Add logging
-			e.printStackTrace();
-			return null;
-		}
+	private static byte[] makeHash(String input, byte[] salt, Strength strength)
+			throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-		return hash;
+		KeySpec spec = new PBEKeySpec(input.toCharArray(), salt, 65536, encryptionLevel(strength));
+		SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+		return factory.generateSecret(spec).getEncoded();
+
 	}
 
 	private static byte[] makeSalt() {

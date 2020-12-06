@@ -44,6 +44,10 @@ dependencies {
     // https://mvnrepository.com/artifact/io.javalin/javalin
 	compile 'io.javalin:javalin:3.12.0'
 	
+	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.0'
+	
+	
 	// https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
 	compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.30'
 	

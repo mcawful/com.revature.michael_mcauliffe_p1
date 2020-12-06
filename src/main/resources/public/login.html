@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="main-style.css">
+    <link rel="stylesheet" href="login.css">
+    <title>Tuition Reinbursement Management System</title>
+</head>
+
+<body>
+    <div id="page" style="margin: auto; width: 400px;">
+
+        <h1 id="mainHeader" style="text-align: center;">Tuition Reinbursement Management System</h1>
+
+        <div id="loginBox">
+            <h1 id="loginHeader" style="text-align: center;">Employee Login</h1>
+            <form id="loginInputs" style="margin: auto;" action="/login" method="POST">
+                <input name="username" id="username" type="text" placeholder="Username" required>
+                <input name="password" id="password" type="password" placeholder="Password" required>
+                <span id="badLogin" style="font-size: 75%; font-weight: bold; color: red;">
+                    INCORRECT USERNAME OR PASSWORD
+                </span>
+                <button id="loginBtn" type="submit">Login</button>
+            </form>
+        </div>
+
+        <footer id="mainFooter" style="text-align: center;">Designer: Michael McAuliffe | Company: Revature | &#169;
+            2020</footer>
+        <script src="login.js"></script>
+</body>
+
+</html>

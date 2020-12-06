@@ -102,7 +102,7 @@ public class EmployeeDaoPostgres implements EmployeeDao<Employee> {
 	@Override
 	public boolean deleteEmployee(int employeeID) {
 
-		String sql = "delete from employee where employee_id = ? returning *;";
+		String sql = "delete from employee cascade where employee_id = ? returning *;";
 
 		try (PreparedStatement ps = connection.prepareStatement(sql)) {
 

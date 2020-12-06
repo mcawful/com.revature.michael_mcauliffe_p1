@@ -14,6 +14,6 @@ public interface LoginController<T> {
 
 	public T getLoginByID(Context ctx);
 
-	public T getLoginByUsername(Context ctx);
+	public void getLoginByUsername(Context ctx);
 
 }

@@ -1,7 +1,5 @@
 package com.revature.michael_mcauliffe_p1.controllers;
 
-import java.util.List;
-
 import io.javalin.http.Context;
 
 public interface RequestController<T> {
@@ -12,10 +10,10 @@ public interface RequestController<T> {
 	
 	public boolean deleteRequest(Context ctx);
 	
-	public T getRequest(Context ctx);
+	public boolean getRequest(Context ctx);
 	
-	public List<T> getAllRequests();
+	public boolean getAllRequests();
 	
-	public List<T> getRequestsBySearch(Context ctx);
+	public boolean getRequestsBySearch(Context ctx);
 	
 }

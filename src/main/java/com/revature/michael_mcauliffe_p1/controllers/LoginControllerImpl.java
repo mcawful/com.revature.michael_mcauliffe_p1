@@ -1,5 +1,8 @@
 package com.revature.michael_mcauliffe_p1.controllers;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
 import com.revature.michael_mcauliffe_p1.pojos.Login;
 import com.revature.michael_mcauliffe_p1.services.LoginServiceImpl;
 import com.revature.michael_mcauliffe_p1.utils.HashAndVerifyUtil;
@@ -28,7 +31,7 @@ public class LoginControllerImpl implements LoginController<Login> {
 		}
 		
 		ctx.html("Username already exists");
-		ctx.status(200);
+		ctx.status(400);
 		return false;
 	}
 
@@ -51,7 +54,7 @@ public class LoginControllerImpl implements LoginController<Login> {
 		}
 		
 		ctx.html("Login information cound not be updated");
-		ctx.status(200);
+		ctx.status(406);
 		return false;
 	}
 
@@ -72,7 +75,7 @@ public class LoginControllerImpl implements LoginController<Login> {
 			return false;
 		}
 		ctx.html("Login information not found for that employee");
-		ctx.status(200);
+		ctx.status(406);
 		return false;
 	}
 
@@ -82,16 +85,16 @@ public class LoginControllerImpl implements LoginController<Login> {
 		try {
 			String username = ctx.formParam("username");
 			String password = ctx.formParam("password");
+
 			String storedHash = loginService.getLoginByUsername(username).getPassword();
 
-			boolean success = HashAndVerifyUtil.verify(password, storedHash);
+			boolean success = HashAndVerifyUtil.verify(password, storedHash, HashAndVerifyUtil.Strength.HIGH);
 			if (success) {
-				ctx.html("Login successful");
-				ctx.status(200);
+				ctx.cookieStore("auth", username);
+				ctx.redirect("/dashboard.html");
 				return true;
 			}
-			ctx.html("Incorrect login");
-			ctx.status(401);
+			ctx.redirect("/login.html#badLogin");
 			return false;
 
 		} catch (Exception e) {
@@ -117,25 +120,25 @@ public class LoginControllerImpl implements LoginController<Login> {
 	}
 
 	@Override
-	public Login getLoginByUsername(Context ctx) {
+	public void getLoginByUsername(Context ctx) {
 
 		try {
-			String username = ctx.formParam("username");
-			return loginService.getLoginByUsername(username);
+			String username = ctx.cookieStore("auth");
+
+				ctx.redirect("/dashboard");
+
 		} catch (Exception e) {
 			// TODO Add logging
 			e.printStackTrace();
-			ctx.status(400);
-			return null;
+			ctx.redirect("/login", 400);
 		}
 	}
 
-	private Login makeLogin(Context ctx) {
+	private Login makeLogin(Context ctx) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
 		int employeeID = Integer.valueOf(ctx.formParam("employeeID"));
 		String username = ctx.formParam("username");
-		String password = HashAndVerifyUtil.hash(ctx.formParam("password"));
-
+		String password = HashAndVerifyUtil.hash(ctx.formParam("password"), HashAndVerifyUtil.Strength.HIGH);
 		Login login = new Login(username, password, employeeID);
 
 		return login;

@@ -2,6 +2,9 @@ package com.revature.michael_mcauliffe_p1.util;
 
 import static org.junit.Assert.*;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -38,20 +41,20 @@ public class HashAndVerifyUtilTest {
 	}
 
 	@Test
-	public void correctPasswordTest() {
+	public void correctPasswordTest() throws NoSuchAlgorithmException, InvalidKeySpecException {
 
 		assertTrue("Should return the same hash.", HashAndVerifyUtil.verify(firstPass, firstHash));
 	}
 
 	@Test
-	public void incorrectPasswordTest() {
+	public void incorrectPasswordTest() throws NoSuchAlgorithmException, InvalidKeySpecException {
 		
 		assertFalse("Should return different hashes. Hash collisions ARE still possible.",
 				HashAndVerifyUtil.verify(secondPass, firstHash));
 	}
 	
 	@Test
-	public void samePasswordDifferentHashTest() {
+	public void samePasswordDifferentHashTest() throws NoSuchAlgorithmException, InvalidKeySpecException {
 		
 		this.secondHash = HashAndVerifyUtil.hash(secondPass);
 		

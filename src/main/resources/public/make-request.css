@@ -1,0 +1,31 @@
+#mainBody, #sideBar {
+    background-color: lightgrey;
+    border-radius: 10px;
+}
+
+#mainBody {
+    margin-right: 10px;
+}
+.tab {
+    display: inline-block;
+    vertical-align: bottom;
+    outline: transparent;
+    background-color: lightgray;
+    outline-width: 2px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    text-align: center;
+    height: 40px;
+    width: 80px;
+}
+
+#logout{
+    color: black;
+    margin: auto;
+    text-align: center;
+}
+
+#homeTab, #pendingRequestTab, #completedRequestTab {
+    color: white;
+    background-color: gray;
+}

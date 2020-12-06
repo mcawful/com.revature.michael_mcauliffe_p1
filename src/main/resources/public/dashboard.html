@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="main-style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <style>
+        .item1 {
+            grid-area: header;
+        }
+
+        .item2 {
+            grid-area: tab;
+        }
+
+        .item3 {
+            grid-area: main;
+        }
+
+        .item4 {
+            grid-area: side;
+        }
+
+        .item5 {
+            grid-area: footer;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-areas:
+                'header header header header header header header header'
+                'tab tab tab tab tab tab tab tab'
+                'main main main main main main side side'
+                'footer footer footer footer footer footer footer footer';
+        }
+    </style>
+    <title>TRMS Dashboard</title>
+</head>
+
+<body>
+    <div id="page" style="margin: auto; width: 800px;">
+
+        <div class="grid-container" id="bodyContainer">
+
+            <h1 class="item1" id="mainHeader" style="text-align: center;">TRMS Dashboard</h1>
+
+            <div class="item2" id="topTabs" style="margin-left: 10px;">
+                <div class="tab" id="homeTab">Home</div>
+                <a href="/request" style="text-decoration: none;">
+                    <div class="tab" id="makeRequestTab">Make Request</div>
+                </a>
+                <div class="tab" id="pendingRequestTab">Pending Requests</div>
+                <div class="tab" id="completedRequestTab">Completed Requests</div>
+            </div>
+            <div class="item3" id="mainBody" style="width: 580px;">
+                <h3 id="dashboardHeader" style="text-align: center;">Main Menu</h3>
+            </div>
+            <div class="item4" id="sideBar" style=" width: 220px;">
+                <div class="links" style="margin: auto; text-align: center; padding-top: 20px;">
+                    <a href="/logout" id="logout">Logout</a>
+                </div>
+            </div>
+        </div>
+
+        <footer class="item5" id="mainFooter" style="text-align: center;">Designer: Michael McAuliffe | Company:
+            Revature | &#169;
+            2020</footer>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+
+</html>

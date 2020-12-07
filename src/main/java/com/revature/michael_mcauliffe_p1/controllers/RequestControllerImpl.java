@@ -5,10 +5,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import com.revature.michael_mcauliffe_p1.pojos.Approval;
 import com.revature.michael_mcauliffe_p1.pojos.Employee;
 import com.revature.michael_mcauliffe_p1.pojos.EventType;
 import com.revature.michael_mcauliffe_p1.pojos.GradeFormat;
 import com.revature.michael_mcauliffe_p1.pojos.Request;
+import com.revature.michael_mcauliffe_p1.pojos.RequestApproval;
+import com.revature.michael_mcauliffe_p1.services.ApprovalServiceImpl;
+import com.revature.michael_mcauliffe_p1.services.EmployeeServiceImpl;
 import com.revature.michael_mcauliffe_p1.services.RequestServiceImpl;
 
 import io.javalin.http.Context;
@@ -16,6 +20,8 @@ import io.javalin.http.Context;
 public class RequestControllerImpl implements RequestController<Request> {
 
 	RequestServiceImpl requestService = new RequestServiceImpl();
+	EmployeeServiceImpl employeeService = new EmployeeServiceImpl();
+	ApprovalServiceImpl approvalService = new ApprovalServiceImpl();
 
 	@Override
 	public void postRequest(Context ctx) {
@@ -42,8 +48,11 @@ public class RequestControllerImpl implements RequestController<Request> {
 				postingDateAndTime, gradeFormat, otherGradeFormat, passingGradeOther, isUrgent);
 
 		request.setOtherEventType(otherEventType);
-
-		if (requestService.addRequest(request)) {
+		Employee employee = employeeService.getEmployee(employeeID);
+		RequestApproval approval = approvalService.makeApproval(request, employee);
+		
+		if (requestService.addRequest(request) && approvalService.addApproval(approval)) {
+			
 			ctx.redirect("/dashboard.html");
 		} else {
 			ctx.redirect("/request-make.html#error");
@@ -67,8 +76,9 @@ public class RequestControllerImpl implements RequestController<Request> {
 	}
 
 	@Override
-	public void getAllRequests() {
-		// TODO Auto-generated method stub
+	public void getAllRequests(Context ctx) {
+		List<Request> requestList = requestService.getRequestsByRequester(ctx.cookieStore("auth"));
+		ctx.json(requestList);
 	}
 
 	@Override

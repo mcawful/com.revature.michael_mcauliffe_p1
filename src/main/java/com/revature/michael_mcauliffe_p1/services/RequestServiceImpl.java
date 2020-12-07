@@ -31,7 +31,14 @@ public class RequestServiceImpl implements RequestService<Request> {
 
 	@Override
 	public List<Request> getRequestsByRequester(int employeeID) {
-		// TODO Add logging
+		
+		try {
+			requestDao = new RequestDaoPostgres();
+			return requestDao.selectRequestsByRequester(employeeID);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 

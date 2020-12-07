@@ -12,7 +12,7 @@ public interface RequestController<T> {
 	
 	public void getRequest(Context ctx);
 	
-	public void getAllRequests();
+	public void getAllRequests(Context ctx);
 	
 	public void getRequestsBySearch(Context ctx);
 	

@@ -166,18 +166,4 @@ public class ApprovalDaoPostgresTest {
 		approvalDao.deleteApproval(approval2.getApprovalID());
 	}
 
-	@Test
-	public void selectApprovalsByRequestTest() {
-
-		List<RequestApproval> approvalList = new ArrayList<>();
-
-		approval2.setApprovalID(approvalDao.insertApproval(approval2));
-
-		approvalList = approvalDao.selectApprovalsByRequest(approval2.getRequestID());
-
-		assertEquals("List should have one member.", 1, approvalList.size());
-
-		approvalDao.deleteApproval(approval2.getApprovalID());
-	}
-
 }

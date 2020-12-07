@@ -15,23 +15,35 @@ public class AppLauncher {
 
 	final static String EMPLOYEE_PATH = "/employee";
 	final static String LOGIN_PATH = "/login";
-	final static String REQUEST_PATH = "/request";
 	final static String DASHBOARD_PATH = "/dashboard";
+	final static String REQUEST_PATH = "/request";
+	final static String PENDING_PATH = "/pending";
 
 	public static void main(String[] args) {
 		Javalin app = Javalin.create(config -> {
 			config.addStaticFiles("/public");
 		}).start(9090);
 
-		app.get(LOGIN_PATH, ctx -> ctx.redirect("/login.html"));
+		
 		app.get(DASHBOARD_PATH, ctx -> {
 			if (authCheck(ctx))
 				ctx.redirect("/dashboard.html");
+		});
+		
+		app.get(REQUEST_PATH, ctx -> {
+			if (authCheck(ctx))
+				ctx.redirect("/make-request.html");
+		});
+		
+		app.get(PENDING_PATH, ctx -> {
+			if (authCheck(ctx))
+				ctx.redirect("/pending.html");
 		});
 
 		employeeEndPoints(app);
 		loginEndPoints(app);
 		requestEndPoints(app);
+		pendingEndPoints(app);
 
 		app.get("/logout", ctx -> {
 			ctx.clearCookieStore();
@@ -50,6 +62,7 @@ public class AppLauncher {
 
 	private static void employeeEndPoints(Javalin app) {
 
+		app.get(LOGIN_PATH, ctx -> ctx.redirect("/login.html"));
 		// app.post(EMPLOYEE_PATH, ctx -> employeeController.postEmployee(ctx));
 		// app.put(EMPLOYEE_PATH, ctx -> employeeController.updateEmployee(ctx));
 		app.get(EMPLOYEE_PATH, ctx -> {
@@ -67,14 +80,18 @@ public class AppLauncher {
 	}
 
 	private static void requestEndPoints(Javalin app) {
-		app.get(REQUEST_PATH, ctx -> {
-			if (authCheck(ctx))
-				ctx.redirect("/make-request.html");
-		});
+		
 		app.post(REQUEST_PATH + "/make", ctx -> {
 			if (authCheck(ctx))
 				requestController.postRequest(ctx);
 		});
 	}
 
+	private static void pendingEndPoints(Javalin app) {
+		
+		app.get(PENDING_PATH + "/view", ctx -> {
+			if (authCheck(ctx))
+				requestController.getAllRequests(ctx);
+		});
+	}
 }

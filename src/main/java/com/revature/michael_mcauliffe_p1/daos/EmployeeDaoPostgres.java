@@ -207,4 +207,43 @@ public class EmployeeDaoPostgres implements EmployeeDao<Employee> {
 
 	}
 
+	@Override
+	public List<Employee> selectBenCoList() {
+		String sql = "select * from employee where is_ben_co = true;";
+		try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
+			ResultSet rs = ps.executeQuery();
+
+			List<Employee> employeeList = new ArrayList<>();
+			while (rs.next()) {
+
+				Employee employee = new Employee();
+
+				employee.setEmployeeID(rs.getInt("employee_id"));
+				employee.setJobTitle(JobTitle.valueOf(rs.getString("job_title")));
+				employee.setDepartment(Department.valueOf(rs.getString("department")));
+				employee.setBenCo(rs.getBoolean("is_ben_co"));
+				employee.setFirstName(rs.getString("first_name"));
+				employee.setLastName(rs.getString("last_name"));
+				employee.setAddress(rs.getString("address"));
+				employee.setCity(rs.getString("city"));
+				employee.setState(rs.getString("state"));
+				employee.setPostalCode(rs.getString("postal_code"));
+				employee.setPhoneNumber(rs.getString("phone_number"));
+				employee.setEmail(rs.getString("email"));
+				employee.setReportsTo(rs.getInt("reports_to"));
+				employee.setAdminLevel(rs.getInt("admin_level"));
+
+				// TODO Add logging
+				employeeList.add(employee);
+			}
+			return employeeList;
+
+		} catch (SQLException e) {
+			// TODO Add logging
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

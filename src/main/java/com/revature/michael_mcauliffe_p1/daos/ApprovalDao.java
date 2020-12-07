@@ -20,6 +20,6 @@ public interface ApprovalDao<T> {
 
 	public List<T> selectApprovalsByFinalApprover(int ID);
 
-	public List<T> selectApprovalsByRequest(String ID);
+	public T selectApprovalByRequest(String ID);
 
 }

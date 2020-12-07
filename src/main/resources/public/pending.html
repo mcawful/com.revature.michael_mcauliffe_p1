@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="main-style.css">
+    <link rel="stylesheet" href="pending.css">
+    <style>
+        .item1 {
+            grid-area: header;
+        }
+
+        .item2 {
+            grid-area: tab;
+        }
+
+        .item3 {
+            grid-area: main;
+        }
+
+        .item4 {
+            grid-area: side;
+        }
+
+        .item5 {
+            grid-area: footer;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-areas:
+                'header header header header header header header header'
+                'tab tab tab tab tab tab tab tab'
+                'main main main main main main side side'
+                'footer footer footer footer footer footer footer footer';
+        }
+    </style>
+    <title>TRMS Pending Requests</title>
+</head>
+
+<body>
+    <div id="page" style="margin: auto; width: 800px;">
+
+        <div class="grid-container" id="bodyContainer">
+
+            <h1 class="item1" id="mainHeader" style="text-align: center;">TRMS Pending Requests</h1>
+
+            <div class="item2" id="topTabs" style="margin-left: 10px;">
+                <a href="/dashboard" style="text-decoration: none;">
+                    <div class="tab" id="homeTab">Home</div>
+                </a>
+                <a href="/request" style="text-decoration: none;">
+                    <div class="tab" id="makeRequestTab">Make Request</div>
+                </a>
+                <div class="tab" id="pendingRequestTab">Pending Requests</div>
+                <div class="tab" id="completedRequestTab">Completed Requests</div>
+            </div>
+            <div class="item3" id="mainBody" style="width: 580px;">
+                <h3 id="dashboardHeader" style="text-align: center;">Pending Requests</h3>
+                <div id="approverPending" hidden>
+                    <h5 id="approverPendingTitle" style="text-align: center;">Approve or Deny the Follow Requests</h6>
+                        <table id="approverPendingTable" style="margin: auto; margin-bottom: 20px; width: 90%;">
+                        </table>
+                </div>
+                <div id="employeePending">
+                    <h5 id="employeePendingTitle" style="text-align: center;">Requests Pending Approval</h6>
+                        <table id="employeePendingTable" style="margin: auto; margin-bottom: 20px; width: 90%;">
+                            <tr id="employeeTableHeader">
+                                <td style="text-align: center; font-size: 75%; width: 10%;">
+                                    Type of Event
+                                </td>
+                                <td style="text-align: center; font-size: 75%; width: 20%;">
+                                    Location
+                                </td>
+                                <td style="text-align: center; font-size: 75%; width: 40%;">
+                                    Description
+                                </td>
+                                <td style="text-align: center; font-size: 75%; width: 10%;">
+                                    Cost
+                                </td>
+                                <td style="text-align: center; font-size: 75%; width: 20%;">
+                                    Estimated Reinbursement
+                                </td>
+                            </tr>
+                        </table>
+                </div>
+            </div>
+            <div class="item4" id="sideBar" style=" width: 220px;">
+                <div class="links" style="margin: auto; text-align: center; padding-top: 20px;">
+                    <a href="/logout" id="logout">Logout</a>
+                </div>
+            </div>
+        </div>
+
+        <footer class="item5" id="mainFooter" style="text-align: center;">Designer: Michael McAuliffe | Company:
+            Revature | &#169;
+            2020</footer>
+    </div>
+
+    <script src="/pending.js"></script>
+</body>
+
+</html>

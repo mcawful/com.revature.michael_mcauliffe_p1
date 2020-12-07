@@ -336,7 +336,7 @@ public class ApprovalDaoPostgres implements ApprovalDao<RequestApproval> {
 	}
 
 	@Override
-	public List<RequestApproval> selectApprovalsByRequest(String formID) {
+	public RequestApproval selectApprovalByRequest(String formID) {
 
 		String sql = "select * from approval where request_id = ?;";
 
@@ -345,32 +345,28 @@ public class ApprovalDaoPostgres implements ApprovalDao<RequestApproval> {
 			ps.setObject(1, formID);
 			ResultSet rs = ps.executeQuery();
 
-			List<RequestApproval> approvalList = new ArrayList<>();
+			RequestApproval approval = new RequestApproval();
 
-			while (rs.next()) {
+			if (!rs.next())
+				return null;
 
-				RequestApproval approval = new RequestApproval();
-
-				approval.setApprovalID((Integer) rs.getObject("approval_id"));
-				approval.setRequestID((String) rs.getObject("request_id"));
-				approval.setFirstApproverID((Integer) rs.getObject("first_approver_id"));
-				approval.setFirstApproval((Boolean) rs.getObject("first_approval"));
-				if (rs.getTimestamp("first_approval_date") != null)
-					approval.setFirstApprovalDateAndTime(rs.getTimestamp("first_approval_date").toLocalDateTime());
-				approval.setSecondApproverID((Integer) rs.getObject("second_approver_id"));
-				approval.setSecondApproval((Boolean) rs.getObject("second_approval"));
-				if (rs.getTimestamp("second_approval_date") != null)
-					approval.setSecondApprovalDateAndTime(rs.getTimestamp("second_approval_date").toLocalDateTime());
-				approval.setFinalApproverID((Integer) rs.getObject("final_approver_id"));
-				approval.setFinalApproval((Boolean) rs.getObject("final_approval"));
-				if (rs.getTimestamp("final_approval_date") != null)
-					approval.setFinalApprovalDateAndTime(rs.getTimestamp("final_approval_date").toLocalDateTime());
-
-				approvalList.add(approval);
-			}
+			approval.setApprovalID((Integer) rs.getObject("approval_id"));
+			approval.setRequestID((String) rs.getObject("request_id"));
+			approval.setFirstApproverID((Integer) rs.getObject("first_approver_id"));
+			approval.setFirstApproval((Boolean) rs.getObject("first_approval"));
+			if (rs.getTimestamp("first_approval_date") != null)
+				approval.setFirstApprovalDateAndTime(rs.getTimestamp("first_approval_date").toLocalDateTime());
+			approval.setSecondApproverID((Integer) rs.getObject("second_approver_id"));
+			approval.setSecondApproval((Boolean) rs.getObject("second_approval"));
+			if (rs.getTimestamp("second_approval_date") != null)
+				approval.setSecondApprovalDateAndTime(rs.getTimestamp("second_approval_date").toLocalDateTime());
+			approval.setFinalApproverID((Integer) rs.getObject("final_approver_id"));
+			approval.setFinalApproval((Boolean) rs.getObject("final_approval"));
+			if (rs.getTimestamp("final_approval_date") != null)
+				approval.setFinalApprovalDateAndTime(rs.getTimestamp("final_approval_date").toLocalDateTime());
 
 			// TODO Add logging
-			return approvalList;
+			return approval;
 
 		} catch (SQLException e) {
 			// TODO Add logging

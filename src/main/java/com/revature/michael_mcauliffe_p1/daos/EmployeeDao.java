@@ -13,5 +13,7 @@ public interface EmployeeDao<T> {
 	public T selectEmployee(int ID);
 
 	public List<T> selectEmployeeList();
+	
+	public List<T> selectBenCoList();
 
 }

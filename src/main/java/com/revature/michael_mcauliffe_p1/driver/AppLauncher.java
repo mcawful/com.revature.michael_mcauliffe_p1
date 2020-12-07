@@ -22,8 +22,8 @@ public class AppLauncher {
 	public static void main(String[] args) {
 		Javalin app = Javalin.create(config -> {
 			config.addStaticFiles("/public");
+			
 		}).start(9090);
-
 		
 		app.get(DASHBOARD_PATH, ctx -> {
 			if (authCheck(ctx))

@@ -35,7 +35,7 @@ window.onload = function () {
 
 
 function addEmployeeRequest(request) {
-    let table = document.getElementById("employeePendingTitle");
+    let table = document.getElementById("employeePendingTable");
 
     let tableRow1 = document.createElement("tr");
     let eventTypeCol = document.createElement("td");
@@ -45,8 +45,24 @@ function addEmployeeRequest(request) {
     let reimburseCol = document.createElement("td");
 
     tableRow1.appendChild(eventTypeCol);
+    tableRow1.appendChild(eventLocationCol);
+    tableRow1.appendChild(descriptionCol);
+    tableRow1.appendChild(costCol);
+    tableRow1.appendChild(reimburseCol);
+    table.appendChild(tableRow1);
 
     eventTypeCol.innerHTML = request.eventType;
+    eventLocationCol.innerHTML = request.location;
+    descriptionCol.innerHTML = request.description;
+    costCol.innerHTML = request.cost;
+    reimburseCol.innerHTML = request.reimbursement;
+
+    eventTypeCol.className = "table-style";
+    eventLocationCol.className = "table-style";
+    descriptionCol.className = "table-style";
+    costCol.className = "table-style";
+    reimburseCol.className = "table-style";
+    tableRow1.className = "table-style";
 }
 
 function addApproverRequests() {

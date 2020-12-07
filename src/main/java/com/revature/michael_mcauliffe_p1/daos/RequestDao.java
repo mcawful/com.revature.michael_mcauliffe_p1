@@ -21,5 +21,5 @@ public interface RequestDao<T> {
 
 	public List<T> selectAllRequests() throws IOException;
 
-	public List<T> selectRequestsByRequester(int ID) throws IOException;
+	public List selectRequestsByRequester(int ID) throws IOException;
 }

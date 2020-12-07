@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.revature.michael_mcauliffe_p1.dtos.RequestDto;
 import com.revature.michael_mcauliffe_p1.pojos.EventType;
 import com.revature.michael_mcauliffe_p1.pojos.GradeFormat;
 import com.revature.michael_mcauliffe_p1.pojos.Request;
@@ -225,7 +226,7 @@ public class RequestDaoPostgres implements RequestDao<Request> {
 	}
 
 	@Override
-	public List<Request> selectRequestsByRequester(int employeeID) {
+	public List<RequestDto> selectRequestsByRequester(int employeeID) {
 
 		String sql = "select * from request where employee_id = ?;";
 
@@ -234,7 +235,7 @@ public class RequestDaoPostgres implements RequestDao<Request> {
 			ps.setObject(1, employeeID);
 			ResultSet rs = ps.executeQuery();
 
-			List<Request> requestList = new ArrayList<>();
+			List<RequestDto> requestList = new ArrayList<>();
 			while (rs.next()) {
 
 				Request request = new Request();
@@ -258,7 +259,8 @@ public class RequestDaoPostgres implements RequestDao<Request> {
 				request.setReimbursement(rs.getDouble("reimbursement"));
 
 				// TODO Add logging
-				requestList.add(request);
+				RequestDto requestDto = new RequestDto(request);
+				requestList.add(requestDto);
 			}
 			return requestList;
 

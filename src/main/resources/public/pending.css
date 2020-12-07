@@ -19,6 +19,11 @@
     width: 80px;
 }
 
+.table-style {
+
+    font-size: 90%;
+}
+
 #employeePendingTable, #approverPendingTable{
     background-color: moccasin;
     padding: 5px;

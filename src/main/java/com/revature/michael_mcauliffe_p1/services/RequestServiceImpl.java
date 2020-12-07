@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.revature.michael_mcauliffe_p1.daos.RequestDaoPostgres;
+import com.revature.michael_mcauliffe_p1.dtos.RequestDto;
 import com.revature.michael_mcauliffe_p1.pojos.Request;
 
 public class RequestServiceImpl implements RequestService<Request> {
@@ -30,7 +31,7 @@ public class RequestServiceImpl implements RequestService<Request> {
 	}
 
 	@Override
-	public List<Request> getRequestsByRequester(int employeeID) {
+	public List<RequestDto> getRequestsByRequester(int employeeID) {
 		
 		try {
 			requestDao = new RequestDaoPostgres();

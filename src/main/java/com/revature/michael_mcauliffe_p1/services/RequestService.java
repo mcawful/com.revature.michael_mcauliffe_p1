@@ -8,8 +8,8 @@ public interface RequestService<T> {
 	
 	public boolean updateRequest(T t);
 	
-	public List<T> getRequestsByRequester(int ID);
+	public List getRequestsByRequester(int ID);
 	
-	public List<T> getRequestsByApprover(int ID);
+	public List getRequestsByApprover(int ID);
 	
 }

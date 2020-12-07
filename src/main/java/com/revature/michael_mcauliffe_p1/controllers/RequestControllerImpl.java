@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import com.revature.michael_mcauliffe_p1.dtos.RequestDto;
 import com.revature.michael_mcauliffe_p1.pojos.Approval;
 import com.revature.michael_mcauliffe_p1.pojos.Employee;
 import com.revature.michael_mcauliffe_p1.pojos.EventType;
@@ -53,7 +54,7 @@ public class RequestControllerImpl implements RequestController<Request> {
 		
 		if (requestService.addRequest(request) && approvalService.addApproval(approval)) {
 			
-			ctx.redirect("/dashboard.html");
+			ctx.redirect("/pending");
 		} else {
 			ctx.redirect("/request-make.html#error");
 		}
@@ -77,7 +78,7 @@ public class RequestControllerImpl implements RequestController<Request> {
 
 	@Override
 	public void getAllRequests(Context ctx) {
-		List<Request> requestList = requestService.getRequestsByRequester(ctx.cookieStore("auth"));
+		List<RequestDto> requestList = requestService.getRequestsByRequester(ctx.cookieStore("auth"));
 		ctx.json(requestList);
 	}
 

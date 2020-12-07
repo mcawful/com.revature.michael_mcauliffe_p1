@@ -11,9 +11,14 @@ plugins {
     id 'java-library'
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+jar {
+	manifest {
+		attributes 'Main-Class': 'com.revature.michael_mcauliffe_p1.driver.AppLauncher'
+	}
+	
+	from {
+		configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+	}
 }
 
 repositories {

@@ -9,9 +9,9 @@ public class ConnectionFactoryUtil {
 	private static ConnectionFactoryUtil instance;
 	private Connection connection;
 
-	private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
-	private static final String USERNAME = "postgres";
-	private static final String PASSWORD = "Link6453";
+	private static final String URL = "jdbc:postgresql://suleiman.db.elephantsql.com:5432/gsdoouod";
+	private static final String USERNAME = "gsdoouod";
+	private static final String PASSWORD = "s6tkOeXdQAoq8c1FfQOTFt7FRkrPDRSu";
 
 	private ConnectionFactoryUtil() throws SQLException {
 

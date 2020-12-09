@@ -11,32 +11,42 @@ let otherPassingGradeType = document.getElementById("otherPassingGrade");
 let otherPassingGradeInput = document.getElementById("otherPassingGradeInput");
 let startDate = new Date();
 
+// calendar init onload handler
 window.addEventListener("load", (event) => {
   setEarliestStartDate(startDate, startDateInput);
 });
 
+// dynamic available dates selector
 startDateInput.addEventListener("change", (event) => {
+
   let endDate = new Date(startDateInput.value);
   let currentEndDate = new Date(endDateInput.value);
+
   endDate.setDate(endDate.getDate() + 1);
   currentEndDate.setDate(currentEndDate.getDate() + 1);
   endDateInput.setAttribute("min", dateToString(endDate));
   endDateInput.value = dateToString(endDate);
+
   if (currentEndDate > endDate) {
     endDateInput.value = dateToString(currentEndDate);
   }
   endDateInput.disabled = false;
 });
 
+// listener for 'Other' event dropdown
+// makes 'Other' custom event input visable
 eventDropdown.addEventListener("change", (change) => {
   handleOtherToggle(eventDropdown, otherEventType, otherEventTypeInput);
 });
 
+// listener for 'Other' grade dropdown
+// makes 'Other' custom grade and passing grade inputs visable
 gradeDropdown.addEventListener("change", (change) => {
   handleOtherToggle(gradeDropdown, otherGradeType, otherGradeTypeInput);
   handleOtherToggle(gradeDropdown, otherPassingGradeType, otherPassingGradeInput);
 });
 
+// date to string converter for calendar inputs
 function dateToString(date) {
   let dd = date.getDate();
   let mm = date.getMonth() + 1; //January is 0!
@@ -51,11 +61,13 @@ function dateToString(date) {
   return date = yyyy + '-' + mm + '-' + dd;
 }
 
+// sets first available calendar date to one week from today
 function setEarliestStartDate(date, input) {
   date.setDate(date.getDate() + 7);
   input.setAttribute("min", dateToString(date));
 }
 
+// handles visibility toggle for 'Other' inputs
 function handleOtherToggle(dropdown, type, input) {
 
   if (dropdown.value == "OTHER") {
@@ -68,6 +80,7 @@ function handleOtherToggle(dropdown, type, input) {
     input.value = null;
   }
 }
+
 
 // currency formatting logic
 var currencyInput = document.getElementById("costInput");
